@@ -1,0 +1,44 @@
+body{
+    letter-spacing: .05em;
+    line-height: 1.4em;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Finger Paint', cursive;
+    font-family: 'Luckiest Guy', cursive;
+    font-family: 'Bangers', cursive;
+    font-family: 'Press Start 2P', cursive;
+    font-family: 'Bungee Shade', cursive;
+    font-family: 'Creepster', cursive;
+    font-family: 'Slackey', cursive;
+    font-family: 'Shojumaru', cursive;
+    font-family: 'Frijole', cursive;
+    font-family: 'Nosifer', cursive;
+    font-family: 'Bonbon', cursive;
+    font-family: 'Faster One', cursive;
+    font-family: 'Monofett', cursive;
+    font-family: 'Londrina Shadow', cursive;
+    font-family: 'Hanalei', cursive;*/
+}
+
+body a {
+    text-decoration:none;
+}
+
+body img {
+    border:0;
+    border-style: none;
+    outline: 0;
+}
+
+a {
+    text-decoration: none;
+    outline: 0;
+}
+
+*:focus {
+    outline: 0;
+}
+
+h2{
+    line-height: 1.6em;
+}
