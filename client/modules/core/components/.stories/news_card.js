@@ -6,6 +6,9 @@ import {NewsCard} from '../news_card.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+// import testImg from './testImg.jpg'
+var testImgURL = require("file-loader!./static/testImg.jpg");
+
 storiesOf('core.NewsCard', module)
   // .addDecorator(muiTheme())
   .addDecorator(story => (
@@ -15,6 +18,6 @@ storiesOf('core.NewsCard', module)
   ))
   .add('default view', () => {
     return (
-        <NewsCard />
+        <NewsCard title="TITLE" text="TEXT" subtitle="SUBTITLE" image={testImgURL}/>
     );
   })
