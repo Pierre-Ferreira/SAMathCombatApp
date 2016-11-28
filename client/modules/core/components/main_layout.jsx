@@ -1,8 +1,8 @@
 import React from 'react';
 import Favicon from 'react-favicon';
+import { Provider } from 'react-redux';
+import getMuiTheme from '../../../../node_modules/material-ui/styles/getMuiTheme'
 
-
-// const DocHead = this.DocHead;
 const title = 'SAMathCombat';
 DocHead.setTitle(title);
 
