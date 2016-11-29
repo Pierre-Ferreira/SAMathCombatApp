@@ -1,7 +1,8 @@
 import React from 'react';
 import Favicon from 'react-favicon';
 import { Provider } from 'react-redux';
-import getMuiTheme from '../../../../node_modules/material-ui/styles/getMuiTheme'
+import { useDeps } from 'mantra-core';
+import getMuiTheme from '../../../../node_modules/material-ui/styles/getMuiTheme';
 
 const title = 'SAMathCombat';
 DocHead.setTitle(title);
@@ -16,13 +17,34 @@ href: 'https://fonts.googleapis.com/css?family=Bangers:300,400,500' +
       'Press+Start+2P|Roboto:300,400,500|Shojumaru|Slackey', type: 'text/css' };
 DocHead.addLink(fontInfo);
 
-const Layout = ({content = () => null }) => (
-  <div>
-    <Favicon url={[ '/src/favicon.ico' ]}/>
-    <div>
-      {content()}
-    </div>
-  </div>
-);
 
-export default Layout;
+class MainLayoutImpl extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.props.store.subscribe(() => {
+      console.log(this.props.store.getState());
+    });
+  }
+  getChildContext() {
+    return { muiTheme: getMuiTheme(baseTheme) };
+  }
+  render() {
+    return (
+      <div>
+        <Provider store={this.props.store}>
+          <Favicon url={[ '/src/favicon.ico' ]}/>
+          <div>
+            {this.props.content}
+          </div>
+        </Provider>
+      </div>
+    );
+  }
+}
+
+const depsToPropsMapper = (context, actions) => ({
+  store: context.Store
+});
+
+export const MainLayout = useDeps(depsToPropsMapper)(MainLayoutImpl);
