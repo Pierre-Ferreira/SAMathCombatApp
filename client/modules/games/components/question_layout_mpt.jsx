@@ -1,32 +1,31 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import ReactDOM from 'react-dom';
-import { connect } from 'react-redux'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+// import { connect } from 'react-redux';
+// import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 
-class QuestionLayoutMpt extends React.Component {
+class QuestionLayoutMPTImpl extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  static childContextTypes =
-  {
-      muiTheme: React.PropTypes.object
-  }
+  // static childContextTypes =
+  // {
+  //     muiTheme: React.PropTypes.object
+  // }
 
-  getChildContext()
-  {
-      return {
-          muiTheme: getMuiTheme()
-      }
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: getMuiTheme()
+  //   };
+  // }
   _answerSubmit(e) {
     e.preventDefault();
     let { answerRef } = this.refs;
-    console.log('this.refs:',this.refs)
-    console.log('ReactDOM.findDOMNode(answerRef):', ReactDOM.findDOMNode(answerRef))
-    console.log('ReactDOM.findDOMNode(answerRef).value:', ReactDOM.findDOMNode(answerRef).value)
+    console.log('this.refs:',this.refs);
+    console.log('ReactDOM.findDOMNode(answerRef):', ReactDOM.findDOMNode(answerRef));
+    console.log('ReactDOM.findDOMNode(answerRef).value:', ReactDOM.findDOMNode(answerRef).value);
     let answer = ReactDOM.findDOMNode(answerRef).value;
     console.log(answer);
     // let inputAnswer = e.target.value;
@@ -45,8 +44,8 @@ class QuestionLayoutMpt extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  menuOpen: state.menu.menuOpen
-})
-
-export const Sidenav = connect(mapStateToProps)(QuestionLayoutMpt)
+// const mapStateToProps = (state) => ({
+//   menuOpen: state.menu.menuOpen
+// });
+//
+// export const QuestionLayoutMPT = connect(mapStateToProps)(QuestionLayoutMPTImpl);

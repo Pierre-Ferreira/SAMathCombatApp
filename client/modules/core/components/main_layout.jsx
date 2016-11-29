@@ -2,6 +2,7 @@ import React from 'react';
 import Favicon from 'react-favicon';
 import { Provider } from 'react-redux';
 import { useDeps } from 'mantra-core';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from '../../../../node_modules/material-ui/styles/getMuiTheme';
 
 const title = 'SAMathCombat';
@@ -32,9 +33,10 @@ class MainLayoutImpl extends React.Component {
   render() {
     return (
       <div>
+        <Favicon url={[ '/src/favicon.ico' ]}/>
         <Provider store={this.props.store}>
-          <Favicon url={[ '/src/favicon.ico' ]}/>
           <div>
+            HELP
             {this.props.content}
           </div>
         </Provider>
@@ -42,6 +44,10 @@ class MainLayoutImpl extends React.Component {
     );
   }
 }
+
+MainLayoutImpl.childContextTypes = {
+  muiTheme: React.PropTypes.object.isRequired
+};
 
 const depsToPropsMapper = (context, actions) => ({
   store: context.Store
