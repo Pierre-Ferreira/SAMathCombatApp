@@ -13,13 +13,14 @@ console.log('gamesModule:',gamesModule)
 // reducers
 const coreReducers = coreModule.reducers;
 const gamesReducers = gamesModule.reducers;
-console.log('coreReducers:',coreReducers)
-console.log('gamesReducers:',gamesReducers)
+// import * as coreReducers from './modules/core/configs/reducers.js';
+// import * as gamesReducers from './modules/games/configs/reducers.js';
+console.log('coreReducers:',coreReducers);
+console.log('gamesReducers:',gamesReducers);
 // Combine Reducers
 const reducer = combineReducers({
-  blank: function( state, action ) {return {};}
-  // ...coreReducers,
-  // ...gamesReducers
+  ...coreReducers,
+  ...gamesReducers
 });
 console.log('reducer:',reducer)
 // init context
