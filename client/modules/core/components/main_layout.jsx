@@ -36,8 +36,7 @@ class MainLayoutImpl extends React.Component {
         <Favicon url={[ '/src/favicon.ico' ]}/>
         <Provider store={this.props.store}>
           <div>
-            HELP
-            {this.props.content}
+            {this.props.content()}
           </div>
         </Provider>
       </div>

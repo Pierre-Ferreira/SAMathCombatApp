@@ -1,0 +1,1 @@
+export const MPT_ANSWER_CHANGE = 'MPT_ANSWER_CHANGE';

@@ -2,7 +2,7 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import { MainLayout } from '../core/components/main_layout.jsx'
-import QuestionLayoutMpt from './components/question_layout_mpt.jsx';
+import GamePlayLayoutMPT from './containers/game_play_layout_mpt.js';
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(MainLayout);
@@ -11,7 +11,7 @@ export default function (injectDeps, {FlowRouter}) {
     name: 'q',
     action() {
       mount(MainLayoutCtx, {
-        content: () => (<QuestionLayoutMpt />)
+        content: () => (<GamePlayLayoutMPT />)
       });
     }
   });
