@@ -1,9 +1,10 @@
 import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
 
-import { QuestionLayoutMPT } from '../components/question_layout_mpt.jsx';
+import { MainLayout } from '../components/main_layout.jsx';
 
 export const composer = ({context}, onData) => {
   const {Meteor, Collections, Store} = context();
+
 
   onData(null, {});
 };
@@ -15,4 +16,4 @@ export const depsMapper = (context, actions) => ({
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(QuestionLayoutMPT);
+)(MainLayout);

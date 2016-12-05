@@ -3,6 +3,7 @@ import TextField from 'material-ui/TextField';
 import ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
+
 /**
  * Import all actions as an object.
  */
@@ -12,38 +13,45 @@ import * as Actions from '../actions';
 class QuestionLayoutMPTImpl extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   _answerSubmit(e) {
     e.preventDefault();
-    let { answerRef } = this.refs;
-    // console.log('this.refs:',this.refs);
-    // console.log('ReactDOM.findDOMNode(answerRef):', ReactDOM.findDOMNode(answerRef));
-    // console.log('ReactDOM.findDOMNode(answerRef).value:', ReactDOM.findDOMNode(answerRef).value);
-    // let answer = ReactDOM.findDOMNode(answerRef).value;
-    // console.log(answer);
-    // let inputAnswer = e.target.value;
+    let userAnswer = this.state.userAnswer;
+    let correctAnswer = this.props.correctAnswer;
+    let result = (Number(userAnswer) === Number(correctAnswer)) ? 'C' : 'W';
+    if (result === 'C') {
+      this.setState({resultFeedback: 'REG:)'});
+    } else {
+      this.setState({resultFeedback: 'VERKEERD!'});
+    }
+    let _questionResult = {
+      qNo: this.props.qNo,
+      num1: this.props.num1,
+      num2: this.props.num2,
+      userAnswer,
+      correctAnswer,
+      result
+    };
+    this.props.actions.MPTAnswerChange(_questionResult);
 
   }
   _answerOnChange(e) {
-    console.log("CHANGE:", e.target.value);
-    console.log("Actions:", Actions);
-    this.props.actions.MPTAnswerChange({
-      answer3: e.target.value
-    });
+// Use NON-REDUX state for local display state.
+    this.setState({userAnswer: e.target.value});
   }
   render() {
     let num1 = this.props.num1;
     let num2 = this.props.num2;
-    let answerCopy = this.props.state.answer1
-                    &&this.props.state.answer1.answer2
-                    &&this.props.state.answer1.answer2.answer3
-                    ||''
+    let resultFeedback = this.state.resultFeedback;
     return (
       <div>
         <form onSubmit={this._answerSubmit.bind(this)}>
-          <h1>{num1} x {num2} = <TextField id="answerRefid" onChange={this._answerOnChange.bind(this)}/></h1>
+          <h1>{num1} x {num2} = <TextField id="answerRefid"
+                                           onChange={this._answerOnChange.bind(this)}/>
+          </h1>
+          <div>{resultFeedback}</div>
         </form>
-        <TextField id="answerCopyid" value={answerCopy}/>
       </div>
     );
   }
@@ -51,6 +59,13 @@ class QuestionLayoutMPTImpl extends React.Component {
 
 // For getStoryBook to work uncomment.
 // export default QuestionLayoutMPTImpl;
+
+QuestionLayoutMPTImpl.propTypes = {
+  num1: React.PropTypes.number.isRequired,
+  num2: React.PropTypes.number.isRequired,
+  correctAnswer: React.PropTypes.number.isRequired,
+  qNo: React.PropTypes.number.isRequired
+};
 
 // For App to work.
 // For getStoryBook to work comment this out.
@@ -64,7 +79,7 @@ class QuestionLayoutMPTImpl extends React.Component {
  * that is necessary.
  */
 const mapStateToProps = (state) => ({
-    state: state
+  state: state
 });
 
 /**
@@ -76,15 +91,15 @@ const mapStateToProps = (state) => ({
  * to the `actions` prop.
  */
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(Actions, dispatch)
-})
+  actions: bindActionCreators(Actions, dispatch)
+});
 
 /**
  * Finally the Redux store is connected
  * to the component with the `connect()`
  * function.
  */
- export const QuestionLayoutMPT = connect(
+export const QuestionLayoutMPT = connect(
                                    mapStateToProps,
                                    mapDispatchToProps
                                  )(QuestionLayoutMPTImpl);

@@ -22,9 +22,12 @@ DocHead.addLink(fontInfo);
 class MainLayoutImpl extends React.Component {
   constructor(props) {
     super(props);
-
+    /**
+     * Subscribing to the store makes it possible to
+     * execute some code every time the state is updated.
+     */
     this.props.store.subscribe(() => {
-      console.log(this.props.store.getState());
+      console.log('STORE:',this.props.store.getState());
     });
   }
   getChildContext() {

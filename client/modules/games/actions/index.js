@@ -1,6 +1,6 @@
-import { MPT_ANSWER_CHANGE } from './actionTypes'
+import { MPT_ANSWER_SUBMIT } from './actionTypes'
 
-export function MPTAnswerChange(answer) {
-console.log("INSIDE index.js",answer)
-  return { type: MPT_ANSWER_CHANGE, answer };
+export function MPTAnswerChange(_questionResults) {
+// console.log("INSIDE index.js",_questionResults)
+  return { type: MPT_ANSWER_SUBMIT, _questionResults };
 }
