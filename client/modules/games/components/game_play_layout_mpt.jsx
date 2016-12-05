@@ -14,31 +14,13 @@ class GamePlayLayoutMPTImpl extends React.Component {
   }
 
   render() {
-    let questionsArray = [
-    {
-    qNo: 1,
-    num1: 10,
-    num2: 8,
-    correctAnswer: 80
-    },
-    {
-    qNo: 2,
-    num1: 5,
-    num2: 3,
-    correctAnswer: 15
-    },
-    {
-    qNo: 3,
-    num1: 7,
-    num2: 9,
-    correctAnswer: 63
-    }]
 
     let _gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
-    let _qNo = questionsArray[_gameQuestionNo - 1].qNo;
-    let _num1 = questionsArray[_gameQuestionNo - 1].num1;
-    let _num2 = questionsArray[_gameQuestionNo - 1].num2;
-    let _correctAnswer = questionsArray[_gameQuestionNo - 1].correctAnswer;
+    let _questionsArray = this.props.questionsArray;
+    let _qNo = _questionsArray[_gameQuestionNo - 1].qNo;
+    let _num1 = _questionsArray[_gameQuestionNo - 1].num1;
+    let _num2 = _questionsArray[_gameQuestionNo - 1].num2;
+    let _correctAnswer = _questionsArray[_gameQuestionNo - 1].correctAnswer;
     return (
       <div>
         <QuestionLayoutMPT qNo={_qNo} num1={_num1} num2={_num2} correctAnswer={_correctAnswer} />
