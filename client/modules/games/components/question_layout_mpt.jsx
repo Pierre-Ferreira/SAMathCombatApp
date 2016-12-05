@@ -13,7 +13,7 @@ import * as Actions from '../actions';
 class QuestionLayoutMPTImpl extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {userAnswer: ''};
   }
   _answerSubmit(e) {
     e.preventDefault();
@@ -34,20 +34,28 @@ class QuestionLayoutMPTImpl extends React.Component {
       result
     };
     this.props.actions.MPTAnswerChange(_questionResult);
-
+    this._cleanInput()
   }
   _answerOnChange(e) {
 // Use NON-REDUX state for local display state.
     this.setState({userAnswer: e.target.value});
   }
+
+  _cleanInput() {
+    this.setState({
+        userAnswer: ''
+    })
+  }
   render() {
     let num1 = this.props.num1;
     let num2 = this.props.num2;
     let resultFeedback = this.state.resultFeedback;
+
     return (
       <div>
         <form onSubmit={this._answerSubmit.bind(this)}>
           <h1>{num1} x {num2} = <TextField id="answerRefid"
+                                           value={this.state.userAnswer}
                                            onChange={this._answerOnChange.bind(this)}/>
           </h1>
           <div>{resultFeedback}</div>

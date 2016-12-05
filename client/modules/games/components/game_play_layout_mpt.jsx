@@ -35,8 +35,6 @@ class GamePlayLayoutMPTImpl extends React.Component {
     }]
 
     let _gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
-
-  console.log('gameQuestionNo:',_gameQuestionNo)
     let _qNo = questionsArray[_gameQuestionNo - 1].qNo;
     let _num1 = questionsArray[_gameQuestionNo - 1].num1;
     let _num2 = questionsArray[_gameQuestionNo - 1].num2;
