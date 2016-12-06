@@ -34,7 +34,7 @@ class QuestionLayoutMPTImpl extends React.Component {
       result
     };
     this.props.actions.MPTAnswerChange(_questionResult);
-    this._cleanInput()
+    this._cleanInput();
   }
   _answerOnChange(e) {
 // Use NON-REDUX state for local display state.
@@ -43,18 +43,19 @@ class QuestionLayoutMPTImpl extends React.Component {
 
   _cleanInput() {
     this.setState({
-        userAnswer: ''
-    })
+      userAnswer: ''
+    });
   }
   render() {
-    let num1 = this.props.num1;
-    let num2 = this.props.num2;
+
+    let props = this.props;
     let resultFeedback = this.state.resultFeedback;
 
     return (
       <div>
         <form onSubmit={this._answerSubmit.bind(this)}>
-          <h1>{num1} x {num2} = <TextField id="answerRefid"
+          <div><b>{props.qNo}/{props.qTotal}</b></div>
+          <h1> {props.num1} x {props.num2} = <TextField id="answerRefid"
                                            value={this.state.userAnswer}
                                            onChange={this._answerOnChange.bind(this)}/>
           </h1>

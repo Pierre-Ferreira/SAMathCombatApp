@@ -7,11 +7,24 @@ import GamePlayLayoutMPT from './containers/game_play_layout_mpt.js';
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(MainLayout);
 
+  let ticket = { // Ticket will be passed as a prop via FlowRouter.
+    timer: 180,
+    qTotal: 5,
+    MPT: 8,
+    variation: 'plain',
+    bonus100Perc: 300,
+    bonus90Perc: 150,
+    bonus80Perc: 100,
+    penalty49Perc: 150,
+    pointsPerCorrect: 20,
+    pointsPerWrong: -10,
+  };
+
   FlowRouter.route('/q', {
     name: 'q',
     action() {
       mount(MainLayoutCtx, {
-        content: () => (<GamePlayLayoutMPT />)
+        content: () => (<GamePlayLayoutMPT ticket={ticket} />)
       });
     }
   });

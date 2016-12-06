@@ -8,22 +8,79 @@ import { connect } from 'react-redux';
  */
 import * as Actions from '../actions';
 
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
+import FlatButton from 'material-ui/FlatButton';
+
 class GamePlayLayoutMPTImpl extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
+// Get the questions info.
+    let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
+    let questionsArray = this.props.questionsArray;
+    let qNo = questionsArray[gameQuestionNo - 1].qNo;
+    let num1 = questionsArray[gameQuestionNo - 1].num1;
+    let num2 = questionsArray[gameQuestionNo - 1].num2;
+    let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
+// Get the game's info.
+    let qTotal = this.props.ticket.qTotal;
+    let timer = this.props.ticket.timer;
+    let MPT = this.props.ticket.MPT;
+    let title = `x${MPT} Maal tafel`;
+    let subtitle = `${qTotal} vrae in ${timer} sekondes`;
+// Determine the game's progress and stats.
+    let gameInitialState = {
+      correct: 0,
+      wrong: 0,
+      pointsScored: 0,
+      pointsLost: 0,
+      percentage: 0
+    }
+    let questionsResults = this.props.state.gameInfo.questionsResults;
+    let gameCurrentState = questionsResults.reduce((obj, x, i) => {
+      if (x.result === 'C') {
+        ++obj.correct;
+        obj.pointsScored += this.props.ticket.pointsPerCorrect;
+      } else {
+        ++obj.wrong;
+        obj.pointsLost += this.props.ticket.pointsPerWrong;
+      }
+      obj.percentage = obj.correct/(i+1)*100
+      return obj
+    }, gameInitialState)
 
-    let _gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
-    let _questionsArray = this.props.questionsArray;
-    let _qNo = _questionsArray[_gameQuestionNo - 1].qNo;
-    let _num1 = _questionsArray[_gameQuestionNo - 1].num1;
-    let _num2 = _questionsArray[_gameQuestionNo - 1].num2;
-    let _correctAnswer = _questionsArray[_gameQuestionNo - 1].correctAnswer;
+
     return (
       <div>
-        <QuestionLayoutMPT qNo={_qNo} num1={_num1} num2={_num2} correctAnswer={_correctAnswer} />
+        <Card expanded={true}>
+         <CardHeader
+           title= {title}
+           subtitle= {subtitle}
+           actAsExpander={true}
+           showExpandableButton={false}
+         />
+         <CardText expandable={true}>
+            <div>Korrek:{gameCurrentState.correct}</div>
+            <div>Verkeerd:{gameCurrentState.wrong}</div>
+            <div>Punte gekry:{gameCurrentState.pointsScored}</div>
+            <div>Punte verloor:{gameCurrentState.pointsLost}</div>
+            <div>Persentasie:{gameCurrentState.percentage}%</div>
+
+            <QuestionLayoutMPT qNo={qNo}
+                               qTotal={qTotal}
+                               num1={num1}
+                               num2={num2}
+                               correctAnswer={correctAnswer}
+            />
+         </CardText>
+         {/* <CardActions expandable={true}>
+             <FlatButton label="Action1" />
+             <FlatButton label="Action2" />
+         </CardActions> */}
+        </Card>
+
       </div>
     );
   }
@@ -41,7 +98,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
  * that is necessary.
  */
 const mapStateToProps = (state) => ({
-    state: state
+  state: state
 });
 
 /**
@@ -53,8 +110,8 @@ const mapStateToProps = (state) => ({
  * to the `actions` prop.
  */
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(Actions, dispatch)
-})
+  actions: bindActionCreators(Actions, dispatch)
+});
 
 /**
  * Finally the Redux store is connected
