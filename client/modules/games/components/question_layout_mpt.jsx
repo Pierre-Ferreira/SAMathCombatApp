@@ -25,7 +25,7 @@ class QuestionLayoutMPTImpl extends React.Component {
     } else {
       this.setState({resultFeedback: 'VERKEERD!'});
     }
-    let _questionResult = {
+    let questionResult = {
       qNo: this.props.qNo,
       num1: this.props.num1,
       num2: this.props.num2,
@@ -33,12 +33,16 @@ class QuestionLayoutMPTImpl extends React.Component {
       correctAnswer,
       result
     };
-    this.props.actions.MPTAnswerChange(_questionResult);
+    this.props.actions.MPTAnswerChange(questionResult);
     this._cleanInput();
   }
   _answerOnChange(e) {
 // Use NON-REDUX state for local display state.
-    this.setState({userAnswer: e.target.value});
+    if (/^\d*$/.test(e.target.value)) {
+      this.setState({userAnswer: e.target.value});
+    } else {
+      this.setState({userAnswer: this.state.userAnswer});
+    }
   }
 
   _cleanInput() {

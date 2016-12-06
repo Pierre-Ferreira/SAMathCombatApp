@@ -1,5 +1,6 @@
 import React from 'react';
 import QuestionLayoutMPT from '../containers/question_layout_mpt.js';
+import GameTimerLayout from './game_timer_layout.jsx';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 
@@ -17,29 +18,37 @@ class GamePlayLayoutMPTImpl extends React.Component {
   }
 
   render() {
-// Get the questions info.
+// Check if any questions are left.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
+    let qTotal = this.props.ticket.qTotal;
+    let gameRunning = true;
+    if (gameQuestionNo > qTotal) {
+      --gameQuestionNo;
+      gameRunning = false;
+    }
+// Get the questions info.
+
     let questionsArray = this.props.questionsArray;
     let qNo = questionsArray[gameQuestionNo - 1].qNo;
     let num1 = questionsArray[gameQuestionNo - 1].num1;
     let num2 = questionsArray[gameQuestionNo - 1].num2;
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
 // Get the game's info.
-    let qTotal = this.props.ticket.qTotal;
-    let timer = this.props.ticket.timer;
+    let time = this.props.ticket.time;
     let MPT = this.props.ticket.MPT;
     let title = `x${MPT} Maal tafel`;
-    let subtitle = `${qTotal} vrae in ${timer} sekondes`;
-// Determine the game's progress and stats.
-    let gameInitialState = {
+    let subtitle = `${qTotal} vrae in ${time} sekondes`;
+// Determine the game's progress and Metrics.
+    let gameInitialMetrics = {
       correct: 0,
       wrong: 0,
       pointsScored: 0,
       pointsLost: 0,
+      pointsTotal: 0,
       percentage: 0
-    }
+    };
     let questionsResults = this.props.state.gameInfo.questionsResults;
-    let gameCurrentState = questionsResults.reduce((obj, x, i) => {
+    let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
       if (x.result === 'C') {
         ++obj.correct;
         obj.pointsScored += this.props.ticket.pointsPerCorrect;
@@ -47,10 +56,10 @@ class GamePlayLayoutMPTImpl extends React.Component {
         ++obj.wrong;
         obj.pointsLost += this.props.ticket.pointsPerWrong;
       }
-      obj.percentage = obj.correct/(i+1)*100
-      return obj
-    }, gameInitialState)
-
+      obj.pointsTotal = obj.pointsScored + obj.pointsLost;
+      obj.percentage = parseInt((obj.correct / qTotal) * 100, 10);
+      return obj;
+    }, gameInitialMetrics);
 
     return (
       <div>
@@ -62,18 +71,20 @@ class GamePlayLayoutMPTImpl extends React.Component {
            showExpandableButton={false}
          />
          <CardText expandable={true}>
-            <div>Korrek:{gameCurrentState.correct}</div>
-            <div>Verkeerd:{gameCurrentState.wrong}</div>
-            <div>Punte gekry:{gameCurrentState.pointsScored}</div>
-            <div>Punte verloor:{gameCurrentState.pointsLost}</div>
-            <div>Persentasie:{gameCurrentState.percentage}%</div>
-
+            <div><GameTimerLayout time={time} /></div>
+            <div>Korrek: {gameCurrentMetrics.correct}</div>
+            <div>Verkeerd: {gameCurrentMetrics.wrong}</div>
+            <div>Punte gekry: {gameCurrentMetrics.pointsScored}pts</div>
+            <div>Punte verloor: {gameCurrentMetrics.pointsLost}pts</div>
+            <div>Punte totaal: {gameCurrentMetrics.pointsTotal}pts</div>
+            <div>Persentasie: {gameCurrentMetrics.percentage}%</div>
+            {gameRunning ?
             <QuestionLayoutMPT qNo={qNo}
                                qTotal={qTotal}
                                num1={num1}
                                num2={num2}
                                correctAnswer={correctAnswer}
-            />
+            /> : <h1>GAME OVER</h1> }
          </CardText>
          {/* <CardActions expandable={true}>
              <FlatButton label="Action1" />
