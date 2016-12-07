@@ -58,11 +58,13 @@ class QuestionLayoutMPTImpl extends React.Component {
     return (
       <div>
         <form onSubmit={this._answerSubmit.bind(this)}>
-          <div><b>{props.qNo}/{props.qTotal}</b></div>
-          <h1> {props.num1} x {props.num2} = <TextField id="answerRefid"
-                                           value={this.state.userAnswer}
-                                           onChange={this._answerOnChange.bind(this)}/>
-          </h1>
+          <div>
+            <h1>
+            {props.num1} x {props.num2} = <TextField id="answerRefid"
+                                             value={this.state.userAnswer}
+                                             onChange={this._answerOnChange.bind(this)}/>
+            </h1>
+          </div>
           <div>{resultFeedback}</div>
         </form>
       </div>

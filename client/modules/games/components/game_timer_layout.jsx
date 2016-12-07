@@ -12,7 +12,7 @@ class GameTimerLayoutImpl extends React.Component {
     super(props);
     this.state = {elapsed: 0, start: new Date()};
   }
-  componentDidMount(){
+  componentDidMount() {
 
       // componentDidMount is called by react when the component
       // has been rendered on the page. We can set the interval here:
@@ -20,7 +20,8 @@ class GameTimerLayoutImpl extends React.Component {
       let gameTime = this.props.time;
       let elapsedTime = (Math.round(this.state.elapsed / 100) / 10).toFixed(1);
       if (elapsedTime < gameTime) {
-        this.tick();
+        // if (this.props.state.gameInfo.gameRunning)
+          this.tick();
       } else {
         clearInterval(this.timer);
         this.props.actions.GameTimerFinished();

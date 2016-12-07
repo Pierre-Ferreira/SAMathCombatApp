@@ -20,29 +20,31 @@ class GamePlayLayoutMPTImpl extends React.Component {
   render() {
 // Check if the game is still running.
     let gameRunning = this.props.state.gameInfo.gameRunning;
+
 // Check if any questions are left.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
     let qTotal = this.props.ticket.qTotal;
-    // let gameRunning = true;
     if (gameQuestionNo > qTotal) {
       --gameQuestionNo;
-      // gameRunning = false;
       this.props.actions.GameTimerFinished();
     }
-// Get the questions info.
 
+// Get the questions info.
     let questionsArray = this.props.questionsArray;
     let qNo = questionsArray[gameQuestionNo - 1].qNo;
     let num1 = questionsArray[gameQuestionNo - 1].num1;
     let num2 = questionsArray[gameQuestionNo - 1].num2;
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
+
 // Get the game's info.
     let time = this.props.ticket.time;
     let MPT = this.props.ticket.MPT;
     let title = `x${MPT} Maal tafel`;
     let subtitle = `${qTotal} vrae in ${time} sekondes`;
+
 // Determine the game's progress and Metrics.
     let gameInitialMetrics = {
+      totalAnswered: 0,
       correct: 0,
       wrong: 0,
       pointsScored: 0,
@@ -59,6 +61,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
         ++obj.wrong;
         obj.pointsLost += this.props.ticket.pointsPerWrong;
       }
+      ++obj.totalAnswered;
       obj.pointsTotal = obj.pointsScored + obj.pointsLost;
       obj.percentage = parseInt((obj.correct / qTotal) * 100, 10);
       return obj;
@@ -75,6 +78,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
          />
          <CardText expandable={true}>
             <div><GameTimerLayout time={time} /></div>
+            <h3>Geantwoord: {gameCurrentMetrics.totalAnswered}/{qTotal}</h3>
             <div>Korrek: {gameCurrentMetrics.correct}</div>
             <div>Verkeerd: {gameCurrentMetrics.wrong}</div>
             <div>Punte gekry: {gameCurrentMetrics.pointsScored}pts</div>

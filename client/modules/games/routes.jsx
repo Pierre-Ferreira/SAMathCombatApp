@@ -8,9 +8,9 @@ export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(MainLayout);
 
   let ticket = { // Ticket will be passed as a prop via FlowRouter.
-    time: 10,
-    qTotal: 5,
-    MPT: 8,
+    time: 3,
+    qTotal: 1,
+    MPT: 5,
     variation: 'plain',
     bonus100Perc: 300,
     bonus90Perc: 150,

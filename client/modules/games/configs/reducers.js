@@ -1,8 +1,10 @@
-import { MPT_ANSWER_SUBMIT, GAME_TIMER_FINISHED } from '../actions/actionTypes';
+import { MPT_ANSWER_SUBMIT, GAME_TIMER_FINISHED, GAME_ALL_QUESTIONS_COMPLETED } from '../actions/actionTypes';
 
 export function gameInfo(state = {questionsResults: [], gameQuestionNo: 1, gameRunning: true}, action) {
   switch (action.type) {
     case GAME_TIMER_FINISHED:
+      return Object.assign({}, state, { gameRunning: false });
+    case GAME_ALL_QUESTIONS_COMPLETED:
       return Object.assign({}, state, { gameRunning: false });
     case MPT_ANSWER_SUBMIT:
       let questionsResults = state.questionsResults;
