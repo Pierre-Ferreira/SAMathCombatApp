@@ -1,7 +1,7 @@
 import React from 'react';
 import QuestionLayoutMPT from '../containers/question_layout_mpt.js';
-import GameTimerLayout from './game_timer_layout.jsx';
-import {bindActionCreators} from 'redux';
+import { GameTimerLayout } from './game_timer_layout.jsx';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 /**
@@ -18,13 +18,16 @@ class GamePlayLayoutMPTImpl extends React.Component {
   }
 
   render() {
+// Check if the game is still running.
+    let gameRunning = this.props.state.gameInfo.gameRunning;
 // Check if any questions are left.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
     let qTotal = this.props.ticket.qTotal;
-    let gameRunning = true;
+    // let gameRunning = true;
     if (gameQuestionNo > qTotal) {
       --gameQuestionNo;
-      gameRunning = false;
+      // gameRunning = false;
+      this.props.actions.GameTimerFinished();
     }
 // Get the questions info.
 

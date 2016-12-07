@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import ReactDOM from 'react-dom';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 /**
@@ -33,7 +33,7 @@ class QuestionLayoutMPTImpl extends React.Component {
       correctAnswer,
       result
     };
-    this.props.actions.MPTAnswerChange(questionResult);
+    this.props.actions.MPTAnswerSubmit(questionResult);
     this._cleanInput();
   }
   _answerOnChange(e) {

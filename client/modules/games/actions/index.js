@@ -1,6 +1,8 @@
-import { MPT_ANSWER_SUBMIT } from './actionTypes'
+import { MPT_ANSWER_SUBMIT, GAME_TIMER_FINISHED } from './actionTypes'
 
-export function MPTAnswerChange(_questionResults) {
-// console.log("INSIDE index.js",_questionResults)
+export function MPTAnswerSubmit(_questionResults) {
   return { type: MPT_ANSWER_SUBMIT, _questionResults };
+}
+export function GameTimerFinished(nothing) {
+  return { type: GAME_TIMER_FINISHED, nothing };
 }

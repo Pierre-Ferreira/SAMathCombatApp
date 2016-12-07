@@ -1,9 +1,9 @@
-import { MPT_ANSWER_SUBMIT } from '../actions/actionTypes';
+import { MPT_ANSWER_SUBMIT, GAME_TIMER_FINISHED } from '../actions/actionTypes';
 
-export function gameInfo(state = {questionsResults: [], gameQuestionNo: 1}, action) {
-// console.log("INSIDE reducers.js",action);
+export function gameInfo(state = {questionsResults: [], gameQuestionNo: 1, gameRunning: true}, action) {
   switch (action.type) {
-    // case MPT_ANSWER_SUBMIT:
+    case GAME_TIMER_FINISHED:
+      return Object.assign({}, state, { gameRunning: false });
     case MPT_ANSWER_SUBMIT:
       let questionsResults = state.questionsResults;
       let gameQuestionNo = state.gameQuestionNo;

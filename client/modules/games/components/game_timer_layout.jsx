@@ -1,30 +1,39 @@
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-class GameTimerLayout extends React.Component {
+/**
+ * Import all actions as an object.
+ */
+import * as Actions from '../actions';
+
+class GameTimerLayoutImpl extends React.Component {
   constructor(props) {
     super(props);
     this.state = {elapsed: 0, start: new Date()};
-    console.log('this.state:',this)
   }
   componentDidMount(){
 
       // componentDidMount is called by react when the component
       // has been rendered on the page. We can set the interval here:
-      this.timer = setInterval(() => {
-                      let gameTime = this.props.time;
-                      let elapsedTime = (Math.round(this.state.elapsed / 100) / 10).toFixed(1);
-                      if (elapsedTime < gameTime)
-                        this.tick();
-                      }
-                    , 5);
+    this.timer = setInterval(() => {
+      let gameTime = this.props.time;
+      let elapsedTime = (Math.round(this.state.elapsed / 100) / 10).toFixed(1);
+      if (elapsedTime < gameTime) {
+        this.tick();
+      } else {
+        clearInterval(this.timer);
+        this.props.actions.GameTimerFinished();
+      }
+    }, 5);
   }
 
   componentWillUnmount(){
 
-      // This method is called immediately before the component is removed
-      // from the page and destroyed. We can clear the interval here:
+    // This method is called immediately before the component is removed
+    // from the page and destroyed. We can clear the interval here:
 
-      clearInterval(this.timer);
+    clearInterval(this.timer);
   }
 
   tick(){
@@ -46,4 +55,45 @@ class GameTimerLayout extends React.Component {
   }
 }
 
-export default GameTimerLayout;
+// export default GameTimerLayout;
+
+GameTimerLayoutImpl.propTypes = {
+  time: React.PropTypes.number.isRequired,
+};
+
+// For App to work.
+// For getStoryBook to work comment this out.
+/**
+ * This function maps the state to a
+ * prop called `state`.
+ *
+ * In larger apps it is often good
+ * to be more selective and only
+ * map the part of the state tree
+ * that is necessary.
+ */
+const mapStateToProps = (state) => ({
+  state: state
+});
+
+/**
+ * This function maps actions to props
+ * and binds them so they can be called
+ * directly.
+ *
+ * In this case all actions are mapped
+ * to the `actions` prop.
+ */
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(Actions, dispatch)
+});
+
+/**
+ * Finally the Redux store is connected
+ * to the component with the `connect()`
+ * function.
+ */
+export const GameTimerLayout = connect(
+                                   mapStateToProps,
+                                   mapDispatchToProps
+                                 )(GameTimerLayoutImpl);

@@ -1,6 +1,6 @@
-import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
+import { useDeps, composeAll, composeWithTracker, compose } from 'mantra-core';
 
-import GameTimerLayout from '../components/game_timer_layout.jsx';
+import { GameTimerLayout } from '../components/game_timer_layout.jsx';
 
 export const composer = ({context}, onData) => {
   const {Meteor, Collections} = context();
