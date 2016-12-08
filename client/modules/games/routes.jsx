@@ -1,15 +1,15 @@
 import React from 'react';
 import {mount} from 'react-mounter';
 
-import { MainLayout } from '../core/components/main_layout.jsx'
+import { MainLayout } from '../core/components/main_layout.jsx';
 import GamePlayLayoutMPT from './containers/game_play_layout_mpt.js';
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(MainLayout);
 
   let ticket = { // Ticket will be passed as a prop via FlowRouter.
-    time: 3,
-    qTotal: 1,
+    time: 5,
+    qTotal: 2,
     MPT: 5,
     variation: 'plain',
     bonus100Perc: 300,

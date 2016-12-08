@@ -17,30 +17,30 @@ class GamePlayLayoutMPTImpl extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+
+  }
+
   render() {
 // Check if the game is still running.
     let gameRunning = this.props.state.gameInfo.gameRunning;
 
-// Check if any questions are left.
-    let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
-    let qTotal = this.props.ticket.qTotal;
-    if (gameQuestionNo > qTotal) {
-      --gameQuestionNo;
-      this.props.actions.GameTimerFinished();
-    }
-
 // Get the questions info.
+    let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
     let questionsArray = this.props.questionsArray;
     let qNo = questionsArray[gameQuestionNo - 1].qNo;
     let num1 = questionsArray[gameQuestionNo - 1].num1;
     let num2 = questionsArray[gameQuestionNo - 1].num2;
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
+// console.log('gameQuestionNo:',gameQuestionNo)
+
 
 // Get the game's info.
     let time = this.props.ticket.time;
     let MPT = this.props.ticket.MPT;
     let title = `x${MPT} Maal tafel`;
     let subtitle = `${qTotal} vrae in ${time} sekondes`;
+    let qTotal = this.props.ticket.qTotal;
 
 // Determine the game's progress and Metrics.
     let gameInitialMetrics = {

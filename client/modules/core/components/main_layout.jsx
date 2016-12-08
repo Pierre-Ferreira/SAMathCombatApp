@@ -27,7 +27,7 @@ class MainLayoutImpl extends React.Component {
      * execute some code every time the state is updated.
      */
     this.props.store.subscribe(() => {
-      console.log('STORE:',this.props.store.getState());
+      // console.log('STORE:',this.props.store.getState());
     });
   }
   getChildContext() {

@@ -10,6 +10,9 @@ import * as Actions from '../actions';
 class GameTimerLayoutImpl extends React.Component {
   constructor(props) {
     super(props);
+
+  }
+  componentWillMount() {
     this.state = {elapsed: 0, start: new Date()};
   }
   componentDidMount() {

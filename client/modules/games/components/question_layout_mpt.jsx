@@ -13,6 +13,9 @@ import * as Actions from '../actions';
 class QuestionLayoutMPTImpl extends React.Component {
   constructor(props) {
     super(props);
+
+  }
+  componentWillMount() {
     this.state = {userAnswer: ''};
   }
   _answerSubmit(e) {
@@ -34,12 +37,23 @@ class QuestionLayoutMPTImpl extends React.Component {
       result
     };
     this.props.actions.MPTAnswerSubmit(questionResult);
+    // let prevQuestionCnt = this.props.qNo;
+    // Check if any questions are left.
+    let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
+    let qTotal = this.props.qTotal;
+    if (gameQuestionNo < qTotal) {
+      let prevQuestionCnt = gameQuestionNo;
+      this.props.actions.UpdateQuestionCounter(prevQuestionCnt + 1);
+    } else {
+      this.props.actions.GameAllQuestionsCompleted();
+    }
     this._cleanInput();
   }
   _answerOnChange(e) {
-// Use NON-REDUX state for local display state.
+
+// Check if the user input is digits only.
     if (/^\d*$/.test(e.target.value)) {
-      this.setState({userAnswer: e.target.value});
+      this.setState({userAnswer: e.target.value}); // Use NON-REDUX state for local display state.
     } else {
       this.setState({userAnswer: this.state.userAnswer});
     }
@@ -49,6 +63,10 @@ class QuestionLayoutMPTImpl extends React.Component {
     this.setState({
       userAnswer: ''
     });
+  }
+
+  _GameAllQuestionsCompleted() {
+
   }
   render() {
 
