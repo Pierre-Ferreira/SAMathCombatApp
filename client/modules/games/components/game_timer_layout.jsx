@@ -23,8 +23,9 @@ class GameTimerLayoutImpl extends React.Component {
       let gameTime = this.props.time;
       let elapsedTime = (Math.round(this.state.elapsed / 100) / 10).toFixed(1);
       if (elapsedTime < gameTime) {
-        // if (this.props.state.gameInfo.gameRunning)
+        if (this.props.state.gameInfo.gameRunning) {
           this.tick();
+        }  
       } else {
         clearInterval(this.timer);
         this.props.actions.GameTimerFinished();
