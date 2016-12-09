@@ -2,6 +2,7 @@ import React from 'react';
 import Favicon from 'react-favicon';
 import { Provider } from 'react-redux';
 import { useDeps } from 'mantra-core';
+import { MainSidebarNav } from '../components/main_sidebar_nav.jsx';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from '../../../../node_modules/material-ui/styles/getMuiTheme';
 
@@ -18,6 +19,11 @@ href: 'https://fonts.googleapis.com/css?family=Bangers:300,400,500' +
       'Press+Start+2P|Roboto:300,400,500|Shojumaru|Slackey', type: 'text/css' };
 DocHead.addLink(fontInfo);
 
+const styles = {
+  content: {
+    marginLeft: 265
+  }
+};
 
 class MainLayoutImpl extends React.Component {
   constructor(props) {
@@ -33,13 +39,15 @@ class MainLayoutImpl extends React.Component {
   getChildContext() {
     return { muiTheme: getMuiTheme(baseTheme) };
   }
+
   render() {
     return (
       <div>
         <Favicon url={[ '/src/favicon.ico' ]}/>
         <Provider store={this.props.store}>
           <div>
-            {this.props.content()}
+            <MainSidebarNav />
+            <div style={styles.content}>{this.props.content()}</div>
           </div>
         </Provider>
       </div>

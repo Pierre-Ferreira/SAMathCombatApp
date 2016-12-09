@@ -3,6 +3,7 @@ import {mount} from 'react-mounter';
 
 import { MainLayout } from '../core/components/main_layout.jsx';
 import GamePlayLayoutMPT from './containers/game_play_layout_mpt.js';
+import GamesTicketsLayout from '../core/containers/games_tickets_layout.js'
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(MainLayout);
@@ -25,6 +26,14 @@ export default function (injectDeps, {FlowRouter}) {
     action() {
       mount(MainLayoutCtx, {
         content: () => (<GamePlayLayoutMPT ticket={ticket} />)
+      });
+    }
+  });
+  FlowRouter.route('/tc', {
+    name: 'tc',
+    action() {
+      mount(MainLayoutCtx, {
+        content: () => (<GamesTicketsLayout />)
       });
     }
   });

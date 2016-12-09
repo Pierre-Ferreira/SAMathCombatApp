@@ -32,15 +32,13 @@ class GamePlayLayoutMPTImpl extends React.Component {
     let num1 = questionsArray[gameQuestionNo - 1].num1;
     let num2 = questionsArray[gameQuestionNo - 1].num2;
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
-// console.log('gameQuestionNo:',gameQuestionNo)
 
-
-// Get the game's info.
+// Get the game's ticket info.
     let time = this.props.ticket.time;
     let MPT = this.props.ticket.MPT;
+    let qTotal = this.props.ticket.qTotal;
     let title = `x${MPT} Maal tafel`;
     let subtitle = `${qTotal} vrae in ${time} sekondes`;
-    let qTotal = this.props.ticket.qTotal;
 
 // Determine the game's progress and Metrics.
     let gameInitialMetrics = {
@@ -77,7 +75,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
            showExpandableButton={false}
          />
          <CardText expandable={true}>
-            <div><GameTimerLayout time={time} /></div>
+            <h2><GameTimerLayout time={time} /></h2>
             <h3>Geantwoord: {gameCurrentMetrics.totalAnswered}/{qTotal}</h3>
             <div>Korrek: {gameCurrentMetrics.correct}</div>
             <div>Verkeerd: {gameCurrentMetrics.wrong}</div>
