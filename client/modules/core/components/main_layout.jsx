@@ -43,7 +43,7 @@ class MainLayoutImpl extends React.Component {
   render() {
     return (
       <div>
-        <Favicon url={[ '/src/favicon.ico' ]}/>
+        {/* <Favicon url={[ '/src/favicon.ico' ]}/> */}
         <Provider store={this.props.store}>
           <div>
             <MainSidebarNav />

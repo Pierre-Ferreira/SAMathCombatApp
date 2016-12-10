@@ -78,9 +78,10 @@ class QuestionLayoutMPTImpl extends React.Component {
         <form onSubmit={this._answerSubmit.bind(this)}>
           <div>
             <h1>
-            {props.num1} x {props.num2} = <TextField id="answerRefid"
-                                             value={this.state.userAnswer}
-                                             onChange={this._answerOnChange.bind(this)}/>
+            {props.num1} x {props.num2} =
+            <TextField id="answerRefid"
+                       value={this.state.userAnswer || ''} // OR is important to keep input controlled.
+                       onChange={this._answerOnChange.bind(this)}/>
             </h1>
           </div>
           <div>{resultFeedback}</div>
