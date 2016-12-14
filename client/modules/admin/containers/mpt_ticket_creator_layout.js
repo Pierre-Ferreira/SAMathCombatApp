@@ -1,6 +1,6 @@
 import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
 
-import MptTicketCreator from '../components/mpt_ticket_creator.jsx';
+import MptTicketCreatorLayout from '../components/mpt_ticket_creator_layout.jsx';
 
 export const composer = ({context}, onData) => {
   const {Meteor, Collections} = context();
@@ -15,4 +15,4 @@ export const depsMapper = (context, actions) => ({
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(MptTicketCreator);
+)(MptTicketCreatorLayout);

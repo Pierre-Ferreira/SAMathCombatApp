@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import { setComposerStub } from 'react-komposer';
-import MptTicketCreator from '../mpt_ticket_creator.jsx';
+import MptTicketCreatorList from '../mpt_ticket_creator_list.jsx';
 
-storiesOf('admin.MptTicketCreator', module)
+storiesOf('admin.MptTicketCreatorList', module)
   .add('default view', () => {
     return (
-      <MptTicketCreator />
+      <MptTicketCreatorList />
     );
   })

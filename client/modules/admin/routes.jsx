@@ -2,7 +2,7 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import { MainLayout } from '../core/components/main_layout.jsx';
-import MPTTicketCreator from './containers/mpt_ticket_creator.js';
+import MptTicketCreatorLayout from './containers/mpt_ticket_creator_layout.js';
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(MainLayout);
@@ -16,7 +16,7 @@ export default function (injectDeps, {FlowRouter}) {
     name: 'adminMPTTicketCreator',
     action() {
       mount(MainLayoutCtx, {
-        content: () => (<MPTTicketCreator />)
+        content: () => (<MptTicketCreatorLayout />)
       });
     }
   });
