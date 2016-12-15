@@ -1,6 +1,8 @@
 import React from 'react';
 import {GridList, GridTile} from 'material-ui/GridList';
-import MptTicketCreatorForm from './mpt_ticket_creator_form.jsx';
+import MptTicketCreatorForm from '../containers/mpt_ticket_creator_form.js';
+import MptTicketCreatorList from '../containers/mpt_ticket_creator_list.js';
+
 const styles = {
   root: {
     display: 'flex',
@@ -28,7 +30,7 @@ class MptTicketCreatorLayout extends React.Component {
             <MptTicketCreatorForm />
           </GridTile>
           <GridTile>
-            <h1>Multiplication Ticket List</h1>
+            <MptTicketCreatorList />
           </GridTile>
         </GridList>
       </div>

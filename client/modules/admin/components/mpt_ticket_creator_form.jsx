@@ -19,11 +19,19 @@ const styles = {
 };
 
 class MptTicketCreatorForm extends React.Component {
+  _ticketCreateSubmit(e) {
+    e.preventDefault();
+
+    let ticketObj = this.props.Store.getState().form.MptTicketCreatorForm.values;
+console.log("ticketObj",ticketObj)
+    let {CreateMPTTicket} = this.props;
+    CreateMPTTicket(ticketObj)
+  }
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     return (
       <div style={styles.root}>
-        <form>
+        <form onSubmit={this._ticketCreateSubmit.bind(this)}>
           <h1>Multiplication Ticket Creator</h1>
           <Field name="gameMPTTable" component={SelectField} hintText="Game Table">
             <MenuItem value="MPT_1" primaryText="1x Table"/>

@@ -1,8 +1,10 @@
 import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
+import { SubscriptionComponent } from 'meteor-ditto';
+import { MptTicketCreatorList } from '../components/mpt_ticket_creator_list.jsx';
 
-import MptTicketCreatorList from '../components/mpt_ticket_creator_list.jsx';
-
-export const composer = ({context}, onData) => {
+export const composer = (infoObj, onData) => {
+  let {context, props} = infoObj;
+console.log('MptTicketCreatorList-props:',infoObj)
   const {Meteor, Collections} = context();
 
   onData(null, {});
@@ -15,4 +17,4 @@ export const depsMapper = (context, actions) => ({
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(MptTicketCreatorList);
+)(SubscriptionComponent(MptTicketCreatorList));

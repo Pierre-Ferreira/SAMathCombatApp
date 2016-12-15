@@ -2,6 +2,7 @@ import {createApp} from 'mantra-core';
 import {combineReducers} from 'redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { reducer as reduxFormReducer } from 'redux-form';
+import { mongo } from 'meteor-ditto';
 import initContext from './configs/context';
 
 injectTapEventPlugin();
@@ -23,7 +24,8 @@ const reducer = combineReducers({
   ...coreReducers,
   ...gamesReducers,
   ...adminReducers,
-  form: reduxFormReducer
+  form: reduxFormReducer,
+  mongo
 });
 // console.log('reducer:',reducer)
 // init context
