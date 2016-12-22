@@ -8,9 +8,15 @@ export const composer = (infoObj, onData) => {
   onData(null, {});
 };
 
-export const depsMapper = (context, actions) => ({
-  context: () => context
-});
+export const depsMapper = (context, actions) =>
+{
+console.log('actions:',actions);
+return (
+ {
+  context: () => context,
+  LoadMPTTicketToForm: actions.load_mpt_ticket_to_form.LoadMPTTicketToForm
+})
+};
 
 export default composeAll(
   composeWithTracker(composer),

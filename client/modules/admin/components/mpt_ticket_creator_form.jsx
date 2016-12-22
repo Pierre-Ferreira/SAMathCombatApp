@@ -21,6 +21,7 @@ const styles = {
 
 const validate = values => {
   const errors = {};
+// Check for required fields.
   const requiredFields = [ 'gameMPTTable',
                            'gameDifficulty',
                            'time',
@@ -36,6 +37,8 @@ const validate = values => {
       errors[field] = 'Required';
     }
   });
+
+// Check for digits only fields.
   const digitsOnlyFields = [ 'time',
                              'qTotal',
                              'pointsPerCorrect',
@@ -49,9 +52,11 @@ const validate = values => {
       errors[field] = errors[field] ? errors[field] + ', ' + 'Digits only' : 'Digits only';
     }
   });
+
+// Check for negative digits only fields.
   const negativeDigitsOnlyFields = [ 'pointsPerWrong',
                                      'penalty49Perc' ];
-  digitsOnlyFields.forEach(field => {
+  negativeDigitsOnlyFields.forEach(field => {
     if (values[field] > 0) {
       errors[field] = errors[field] ?
                       errors[field] + ', ' + 'Negative Digits only' :
@@ -80,7 +85,8 @@ const renderSelectField = props => (
     floatingLabelText={props.label}
     errorText={props.touched && props.error}
     {...props}
-    onChange={(event, index, value) => props.onChange(value)}>
+    // onChange={(event, index, value) => props.onChange(value)}
+  >
   </SelectField>
 )
 
