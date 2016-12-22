@@ -11,7 +11,6 @@ import * as Actions from '../actions';
 class MptTicketCreatorListImpl extends React.Component {
   constructor(props) {
     super(props);
-console.log("PROPS:",props)
   }
   componentWillMount() {
     this.props.subscribe('get_mpt_tickets');
@@ -25,7 +24,7 @@ console.log("PROPS:",props)
         <h1>Multiplication Ticket List</h1>
         {mptGameTicketsReady ?
           mptGameTickets.map((x,i) => {
-            return <div key={i}>gameMPTTable: {x.ticketObj.gameDifficulty} </div>
+            return <div key={i}>gameMPTTable: {x._id} </div>
           })
         : <div> LOADING...</div>}
       </div>
@@ -55,9 +54,9 @@ const mapStateToProps = (state) => ({
  * In this case all actions are mapped
  * to the `actions` prop.
  */
-// const mapDispatchToProps = (dispatch) => ({
-//   actions: bindActionCreators(Actions, dispatch)
-// });
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(Actions, dispatch)
+});
 
 /**
  * Finally the Redux store is connected
@@ -66,5 +65,5 @@ const mapStateToProps = (state) => ({
  */
 export const MptTicketCreatorList = connect(
                                     mapStateToProps,
-                                    // mapDispatchToProps
+                                    mapDispatchToProps
                                   )(SubscriptionComponent(MptTicketCreatorListImpl));

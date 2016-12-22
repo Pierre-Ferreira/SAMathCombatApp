@@ -18,22 +18,90 @@ const styles = {
   }
 };
 
-class MptTicketCreatorForm extends React.Component {
-  _ticketCreateSubmit(e) {
-    e.preventDefault();
 
+const validate = values => {
+  const errors = {};
+  const requiredFields = [ 'gameMPTTable',
+                           'gameDifficulty',
+                           'time',
+                           'qTotal',
+                           'pointsPerCorrect',
+                           'pointsPerWrong',
+                           'bonus100Perc',
+                           'bonus90Perc',
+                           'bonus80Perc',
+                           'penalty49Perc' ];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = 'Required';
+    }
+  });
+  const digitsOnlyFields = [ 'time',
+                             'qTotal',
+                             'pointsPerCorrect',
+                             'pointsPerWrong',
+                             'bonus100Perc',
+                             'bonus90Perc',
+                             'bonus80Perc',
+                             'penalty49Perc' ];
+  digitsOnlyFields.forEach(field => {
+    if (!/^-?\d+$/i.test(values[field])) {
+      errors[field] = errors[field] ? errors[field] + ', ' + 'Digits only' : 'Digits only';
+    }
+  });
+  const negativeDigitsOnlyFields = [ 'pointsPerWrong',
+                                     'penalty49Perc' ];
+  digitsOnlyFields.forEach(field => {
+    if (values[field] > 0) {
+      errors[field] = errors[field] ?
+                      errors[field] + ', ' + 'Negative Digits only' :
+                      'Negative Digits only';
+    }
+  });
+  return errors;
+};
+
+const renderTextField = props => (
+  <TextField hintText={props.label}
+    floatingLabelText={props.label}
+    errorText={props.touched && props.error}
+    {...props}
+  />
+);
+
+const renderCheckbox = props => (
+  <Checkbox label={props.label}
+    checked={props.value ? true : false}
+    onCheck={props.onChange}/>
+)
+
+const renderSelectField = props => (
+  <SelectField
+    floatingLabelText={props.label}
+    errorText={props.touched && props.error}
+    {...props}
+    onChange={(event, index, value) => props.onChange(value)}>
+  </SelectField>
+)
+
+class MptTicketCreatorForm extends React.Component {
+
+  _ticketCreateSubmit(e) {
+    // e.preventDefault();
     let ticketObj = this.props.Store.getState().form.MptTicketCreatorForm.values;
 console.log("ticketObj",ticketObj)
     let {CreateMPTTicket} = this.props;
     CreateMPTTicket(ticketObj)
   }
+
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { change, handleSubmit, pristine, reset, submitting } = this.props;
+
     return (
       <div style={styles.root}>
-        <form onSubmit={this._ticketCreateSubmit.bind(this)}>
+        <form onSubmit={handleSubmit(this._ticketCreateSubmit.bind(this))}>
           <h1>Multiplication Ticket Creator</h1>
-          <Field name="gameMPTTable" component={SelectField} hintText="Game Table">
+          <Field name="gameMPTTable" component={renderSelectField} hintText="Game Table">
             <MenuItem value="MPT_1" primaryText="1x Table"/>
             <MenuItem value="MPT_2" primaryText="2x Table"/>
             <MenuItem value="MPT_3" primaryText="3x Table"/>
@@ -50,58 +118,58 @@ console.log("ticketObj",ticketObj)
             <MenuItem value="MPT_14" primaryText="14x Table"/>
             <MenuItem value="MPT_15" primaryText="15x Table"/>
           </Field>
-          <Field name="gameDifficulty" component={RadioButtonGroup}>
-            <RadioButton value="easy" label="easy"/>
-            <RadioButton value="moderate" label="moderate"/>
-            <RadioButton value="hard" label="hard"/>
-            <RadioButton value="extreme" label="extreme"/>
+          <Field name="gameDifficulty" component={renderSelectField} hintText="Game Difficulty">
+            <MenuItem value="easy" primaryText="easy"/>
+            <MenuItem value="moderate" primaryText="moderate"/>
+            <MenuItem value="hard" primaryText="hard"/>
+            <MenuItem value="extreme" primaryText="extreme"/>
+
           </Field>
          <Field name="time"
-                component={TextField}
+                component={renderTextField}
                 hintText="Game Time"
                 floatingLabelText="Game Time"/>
          <Field name="qTotal"
-                component={TextField}
+                component={renderTextField}
                 hintText="Amount of q's"
                 floatingLabelText="Amount of q's"/>
          <Field name="pointsPerCorrect"
-                component={TextField}
+                component={renderTextField}
                 hintText="Points per correct"
                 floatingLabelText="Points per correct"/>
          <Field name="pointsPerWrong"
-                component={TextField}
+                component={renderTextField}
                 hintText="Points per wrong"
                 floatingLabelText="Points per wrong"/>
          <Field name="bonus100Perc"
-                component={TextField}
+                component={renderTextField}
                 hintText="100% bonus pts"
                 floatingLabelText="100% bonus pts"/>
          <Field name="bonus90Perc"
-                component={TextField}
+                component={renderTextField}
                 hintText="100% bonus pts"
                 floatingLabelText="90% bonus pts"/>
          <Field name="bonus80Perc"
-                component={TextField}
+                component={renderTextField}
                 hintText="100% bonus pts"
                 floatingLabelText="80% bonus pts"/>
          <Field name="penalty49Perc"
-                component={TextField}
+                component={renderTextField}
                 hintText="<50% penalty pts"
                 floatingLabelText="<50% penalty pts"/>
-
-                <div>
-                  <RaisedButton type="submit"
-                          disabled={pristine || submitting}
-                          primary={true}
-                          style={styles.styleRaisedButton}
-                          label="Submit" />
-                  <RaisedButton type="button"
-                          disabled={pristine || submitting}
-                          primary={true}
-                          onClick={reset}
-                          style={styles.styleRaisedButton}
-                          label="Clear Values" />
-                </div>
+          <div>
+            <RaisedButton type="submit"
+                    disabled={pristine || submitting}
+                    primary={true}
+                    style={styles.styleRaisedButton}
+                    label="Submit" />
+            <RaisedButton type="button"
+                    disabled={pristine || submitting}
+                    primary={true}
+                    onClick={reset}
+                    style={styles.styleRaisedButton}
+                    label="Clear Values" />
+          </div>
         </form>
       </div>
     );
@@ -110,7 +178,8 @@ console.log("ticketObj",ticketObj)
 
 // Decorate with redux-form
 MptTicketCreatorForm = reduxForm({
-  form: 'MptTicketCreatorForm'
+  form: 'MptTicketCreatorForm',
+  validate
 })(MptTicketCreatorForm);
 
 export default MptTicketCreatorForm;

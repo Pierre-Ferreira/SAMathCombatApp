@@ -6,7 +6,6 @@ import {Tracker} from 'meteor/tracker';
 
 // Redux
 import { createStore, applyMiddleware, compose } from 'redux';
-// import thunk from 'redux-thunk';
 import ReduxThunk from 'redux-thunk'
 
 // Collections to link to Redux store.
@@ -16,7 +15,6 @@ import GameTickets from '../../lib/collections/game_tickets.js';
 const defaultState = {};
 
 export default function ({ reducer }) {
-  // let Store = createStore(reducer, defaultState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
   const Store = createStore(reducer, compose(
     applyMiddleware(ReduxThunk),
     window.devToolsExtension ? window.devToolsExtension() : fn => fn
