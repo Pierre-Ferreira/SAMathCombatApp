@@ -1,5 +1,6 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { Random } from 'meteor/random';
 import MenuItem from 'material-ui/MenuItem';
 import { RadioButton } from 'material-ui/RadioButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -88,7 +89,7 @@ const renderSelectField = props => (
     // onChange={(event, index, value) => props.onChange(value)}
   >
   </SelectField>
-)
+);
 
 class MptTicketCreatorForm extends React.Component {
 
@@ -99,7 +100,12 @@ console.log("ticketObj",ticketObj)
     let {CreateMPTTicket} = this.props;
     CreateMPTTicket(ticketObj)
   }
+  _newTicket() {
+console.log('NEWTICKET', Random.id())
+  }
+  _copyTicket() {
 
+  }
   render() {
     const { change, handleSubmit, pristine, reset, submitting } = this.props;
 
@@ -107,6 +113,22 @@ console.log("ticketObj",ticketObj)
       <div style={styles.root}>
         <form onSubmit={handleSubmit(this._ticketCreateSubmit.bind(this))}>
           <h1>Multiplication Ticket Creator</h1>
+          <RaisedButton type="button"
+                  // disabled={pristine || submitting}
+                  primary={true}
+                  onClick={this._newTicket.bind(this)}
+                  style={styles.styleRaisedButton}
+                  label="New ticket" />
+          <RaisedButton type="button"
+                  // disabled={pristine || submitting}
+                  primary={true}
+                  onClick={reset}
+                  style={styles.styleRaisedButton}
+                  label="Copy Ticket" />
+          <Field name="ticketId"
+                 component={renderTextField}
+                 hintText=""
+                 floatingLabelText=""/>
           <Field name="gameMPTTable" component={renderSelectField} hintText="Game Table">
             <MenuItem value="MPT_1" primaryText="1x Table"/>
             <MenuItem value="MPT_2" primaryText="2x Table"/>

@@ -2,6 +2,8 @@ import React from 'react';
 import { SubscriptionComponent } from 'meteor-ditto';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { initialize } from 'redux-form';
+
 
 /**
  * Import all actions as an object.
