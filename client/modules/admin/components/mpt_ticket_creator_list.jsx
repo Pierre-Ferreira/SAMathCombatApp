@@ -24,8 +24,7 @@ class MptTicketCreatorListImpl extends React.Component {
   }
   render() {
     let mptGameTickets = this.props.state.mongo.collections.game_tickets;
-    let mptGameTicketsReady = this.props.subscriptionReady('get_mpt_tickets')
-    console.log('TICKETS:',mptGameTickets)
+    let mptGameTicketsReady = this.props.subscriptionReady('get_mpt_tickets');
     return (
       <div>
         <h1>Multiplication Ticket List</h1>
@@ -33,9 +32,9 @@ class MptTicketCreatorListImpl extends React.Component {
           mptGameTickets.map((x,i) => {
             return <div key={i} onClick={this._loadToForm.bind(this, x._id)}>
                     {x.ticketObj.gameMPTTable} {x.ticketObj.gameDifficulty}
-                   </div>
-          })
-        : <div> LOADING...</div>}
+                   </div>;
+          }) :
+          <div> LOADING...</div>}
       </div>
     );
   }

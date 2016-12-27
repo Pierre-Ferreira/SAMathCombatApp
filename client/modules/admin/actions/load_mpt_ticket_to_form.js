@@ -7,8 +7,9 @@ export default {
       if (err) {
         console.log('err:', err.message);
       } else {
-        console.log('RESULT:', result.ticketObj);
-        Store.dispatch(initialize('MptTicketCreatorForm', result.ticketObj));
+        let returnObj = Object.assign({}, result.ticketObj);
+        returnObj.ticketId = result._id;
+        Store.dispatch(initialize('MptTicketCreatorForm', returnObj));
       }
     });
   }

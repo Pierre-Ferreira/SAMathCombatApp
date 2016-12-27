@@ -1,10 +1,13 @@
 // import { Meteor } from 'meteor/meteor';
 
-export default {
-  CreateMPTTicket({Meteor, LocalState, FlowRouter}, ticketObj) {
-    Meteor.call('create_mpt_ticket',ticketObj, (err, result) => {})
-  }
-};
+// export default {
+//   CreateMPTTicket({Meteor, LocalState, FlowRouter}, ticketObj) {
+//     Meteor.call('create_mpt_ticket',ticketObj, (err, result) => {
+//       if (err)
+//         console.log(err.message);
+//     });
+//   }
+// };
 
 // export const CreateMPTTicket = ticketObj => {
 //   return dispatch => {

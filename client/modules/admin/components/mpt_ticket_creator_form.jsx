@@ -23,7 +23,8 @@ const styles = {
 const validate = values => {
   const errors = {};
 // Check for required fields.
-  const requiredFields = [ 'gameMPTTable',
+  const requiredFields = [ 'ticketId',
+                           'gameMPTTable',
                            'gameDifficulty',
                            'time',
                            'qTotal',
@@ -93,19 +94,18 @@ const renderSelectField = props => (
 
 class MptTicketCreatorForm extends React.Component {
 
-  _ticketCreateSubmit(e) {
-    // e.preventDefault();
+  _ticketCreateSubmit() {
     let ticketObj = this.props.Store.getState().form.MptTicketCreatorForm.values;
-console.log("ticketObj",ticketObj)
-    let {CreateMPTTicket} = this.props;
-    CreateMPTTicket(ticketObj)
+    let {UpdateMPTTicket} = this.props;
+    UpdateMPTTicket(ticketObj);
   }
   _newTicket() {
-console.log('NEWTICKET', Random.id())
+    const randomID = Random.id();
+console.log('NEWTICKET', randomID);
+    const { Store, change } = this.props;
+    Store.dispatch(change('ticketId', randomID));
   }
-  _copyTicket() {
 
-  }
   render() {
     const { change, handleSubmit, pristine, reset, submitting } = this.props;
 
@@ -119,12 +119,6 @@ console.log('NEWTICKET', Random.id())
                   onClick={this._newTicket.bind(this)}
                   style={styles.styleRaisedButton}
                   label="New ticket" />
-          <RaisedButton type="button"
-                  // disabled={pristine || submitting}
-                  primary={true}
-                  onClick={reset}
-                  style={styles.styleRaisedButton}
-                  label="Copy Ticket" />
           <Field name="ticketId"
                  component={renderTextField}
                  hintText=""
