@@ -16,6 +16,9 @@ const styles = {
   },
   styleRaisedButton: {
     margin: 12,
+  },
+  raisedButtonNew: {
+    width: '65%',
   }
 };
 
@@ -101,7 +104,6 @@ class MptTicketCreatorForm extends React.Component {
   }
   _newTicket() {
     const randomID = Random.id();
-console.log('NEWTICKET', randomID);
     const { Store, change } = this.props;
     Store.dispatch(change('ticketId', randomID));
   }
@@ -114,14 +116,15 @@ console.log('NEWTICKET', randomID);
         <form onSubmit={handleSubmit(this._ticketCreateSubmit.bind(this))}>
           <h1>Multiplication Ticket Creator</h1>
           <RaisedButton type="button"
-                  // disabled={pristine || submitting}
                   primary={true}
                   onClick={this._newTicket.bind(this)}
-                  style={styles.styleRaisedButton}
+                  // fullWidth = {true}
+                  style={styles.raisedButtonNew}
                   label="New ticket" />
           <Field name="ticketId"
                  component={renderTextField}
                  hintText=""
+                 disabled = {true}
                  floatingLabelText=""/>
           <Field name="gameMPTTable" component={renderSelectField} hintText="Game Table">
             <MenuItem value="MPT_1" primaryText="1x Table"/>
