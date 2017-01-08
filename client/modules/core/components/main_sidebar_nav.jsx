@@ -102,7 +102,7 @@ class MainSidebarNavImpl extends React.Component {
               primaryTogglesNestedList={true}
               nestedItems={[
                 <ListItem
-                  href="/q"
+                  href="/tickets/mpt"
                   primaryText="X"
                   key={1}
                   onTouchTap={() => this.handleClose()}

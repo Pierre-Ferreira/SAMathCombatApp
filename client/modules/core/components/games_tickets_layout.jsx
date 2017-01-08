@@ -1,5 +1,6 @@
 import React from 'react';
 import GamesTicketCard from '../containers/games_ticket_card.js';
+import { SubscriptionComponent } from 'meteor-ditto';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -12,12 +13,30 @@ class GamesTicketsLayoutImpl extends React.Component {
   constructor(props) {
     super(props);
   }
-
+  componentWillMount() {
+console.log(this.props)
+    this.props.subscribe('get_mpt_tickets');
+  }
+  _loadToGAME(ticketId) {
+    console.log('LOAD TO STATE:',ticketId);
+    let { FlowRouter } = this.props;
+    FlowRouter.go('/mptgameplay/' + ticketId);
+  }
   render() {
+    let mptGameTickets = this.props.state.mongo.collections.game_tickets;
+    let mptGameTicketsReady = this.props.subscriptionReady('get_mpt_tickets');
     return (
       <div>
-        GamesTicketsLayout
-        <GamesTicketCard />
+        <div>
+          <h1>Multiplication Ticket List</h1>
+          {mptGameTicketsReady ?
+            mptGameTickets.map((x,i) => {
+              return <div key={i} onClick={this._loadToGAME.bind(this, x._id)}>
+                      {x.ticketObj.gameMPTTable} {x.ticketObj.gameDifficulty}
+                     </div>;
+            }) :
+            <div> LOADING...</div>}
+        </div>
       </div>
     );
   }
@@ -57,4 +76,4 @@ const mapDispatchToProps = (dispatch) => ({
 export const GamesTicketsLayout = connect(
                                     mapStateToProps,
                                     mapDispatchToProps
-                                  )(GamesTicketsLayoutImpl);
+                                  )(SubscriptionComponent(GamesTicketsLayoutImpl));

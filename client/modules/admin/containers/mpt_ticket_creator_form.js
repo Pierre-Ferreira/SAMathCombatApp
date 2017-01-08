@@ -11,7 +11,6 @@ export const composer = ({context}, onData) => {
 export const depsMapper = (context, actions) => ({
   context: () => context,
   UpdateMPTTicket: actions.update_mpt_ticket.UpdateMPTTicket
-  // CreateMPTTicket: actions.create_mpt_ticket.CreateMPTTicket
 });
 
 export default composeAll(

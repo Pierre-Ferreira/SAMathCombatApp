@@ -148,7 +148,9 @@ class MptTicketCreatorForm extends React.Component {
             <MenuItem value="moderate" primaryText="moderate"/>
             <MenuItem value="hard" primaryText="hard"/>
             <MenuItem value="extreme" primaryText="extreme"/>
-
+          </Field>
+          <Field name="gameVariation" component={renderSelectField} hintText="Game Variation">
+            <MenuItem value="plain" primaryText="plain"/>
           </Field>
          <Field name="time"
                 component={renderTextField}
