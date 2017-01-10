@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import CircularProgress from 'material-ui/CircularProgress';
 /**
  * Import all actions as an object.
  */
@@ -45,7 +45,7 @@ class GameTimerLayoutImpl extends React.Component {
 
 // This function is called every 50 ms. It updates the
 // elapsed counter. Calling setState causes the component to be re-rendered
-      this.setState({elapsed: new Date() - this.state.start});
+    this.setState({elapsed: new Date() - this.state.start});
   }
   render() {
     let elapsed = Math.round(this.state.elapsed / 100);
@@ -53,9 +53,50 @@ class GameTimerLayoutImpl extends React.Component {
 // This will give a number with one digit after the decimal dot (xx.x):
     let seconds = (elapsed / 10).toFixed(1);
 
+// Length of time allowed.
+    let gameTime = this.props.time;
 // Although we return an entire <p> element, react will smartly update
 // only the changed parts, which contain the seconds variable.
-    return <p><b>{seconds}s / {this.props.time}s</b></p>;
+    return (
+      <div>
+        <div>
+          <CircularProgress
+            mode="determinate"
+            value={Number(seconds)}
+            max={Number(gameTime)}
+            size={60}
+            thickness={5}
+          />
+          <CircularProgress
+            mode="determinate"
+            value={Number(seconds)}
+            max={Number(gameTime)}
+            size={60}
+            thickness={5}
+            color={"Red"}
+          />
+          <CircularProgress
+            mode="determinate"
+            value={Number(seconds)}
+            max={Number(gameTime)}
+            size={60}
+            thickness={5}
+          />
+          {/* <p><b>{seconds}s / {this.props.time}s</b></p> */}
+        </div>
+        <div>
+          {/* <CircularProgress
+            mode="determinate"
+            value={Number(seconds)}
+            max={Number(gameTime*2)}
+            size={40}
+            thickness={25}
+            color={"Green"}
+          /> */}
+        {/* <p><b>{seconds}s / {this.props.time}s</b></p> */}
+        </div>
+      </div>
+    );
   }
 }
 

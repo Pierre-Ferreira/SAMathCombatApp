@@ -33,14 +33,6 @@ console.log("LocalState.get('newGameTicketObj'):",LocalState.get('newGameTicketO
       onData(null, {questionsArray, ticket});
     }
   });
-  // let timeoutID = window.setTimeout( function (newGameTicketObj) {
-  //
-  //
-  //
-  // }
-  // , 2000);
-  // window.clearTimeout(timeoutID);
-
 };
 
 export const depsMapper = (context, actions) => {
