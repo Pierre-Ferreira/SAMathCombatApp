@@ -28,15 +28,15 @@ class GamePlayLayoutMPTImpl extends React.Component {
 // Get the questions info.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
     let questionsArray = this.props.questionsArray;
-    let qNo = questionsArray[gameQuestionNo - 1].qNo;
-    let num1 = questionsArray[gameQuestionNo - 1].num1;
-    let num2 = questionsArray[gameQuestionNo - 1].num2;
+    let qNo = Number(questionsArray[gameQuestionNo - 1].qNo);
+    let num1 = Number(questionsArray[gameQuestionNo - 1].num1);
+    let num2 = Number(questionsArray[gameQuestionNo - 1].num2);
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
 
 // Get the game's ticket info.
-    let time = this.props.ticket.time;
-    let MPT = this.props.ticket.MPT;
-    let qTotal = this.props.ticket.qTotal;
+    let time = Number(this.props.ticket.time);
+    let MPT = Number(this.props.ticket.MPT);
+    let qTotal = Number(this.props.ticket.qTotal);
     let title = `x${MPT} Maal tafel`;
     let subtitle = `${qTotal} vrae in ${time} sekondes`;
 
@@ -54,10 +54,10 @@ class GamePlayLayoutMPTImpl extends React.Component {
     let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
       if (x.result === 'C') {
         ++obj.correct;
-        obj.pointsScored += this.props.ticket.pointsPerCorrect;
+        obj.pointsScored += Number(this.props.ticket.pointsPerCorrect);
       } else {
         ++obj.wrong;
-        obj.pointsLost += this.props.ticket.pointsPerWrong;
+        obj.pointsLost += Number(this.props.ticket.pointsPerWrong);
       }
       ++obj.totalAnswered;
       obj.pointsTotal = obj.pointsScored + obj.pointsLost;

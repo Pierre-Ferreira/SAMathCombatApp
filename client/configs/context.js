@@ -26,7 +26,7 @@ export default function ({ reducer }) {
     Meteor,
     FlowRouter,
     Collections,
-    // LocalState: new ReactiveDict(),
+    LocalState: new ReactiveDict(),
     Store,
     Tracker
   };

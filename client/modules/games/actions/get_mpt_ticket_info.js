@@ -7,7 +7,8 @@ export default {
         let returnObj = Object.assign({}, result.ticketObj);
         returnObj.ticketId = result._id;
 console.log('returnObj:::::',returnObj)
-        return returnObj;
+        LocalState.set("newGameTicketObj", returnObj)
+        // return returnObj;
         // Store.dispatch('NewGameTicketInfo', returnObj);
       }
     });
