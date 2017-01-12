@@ -6,8 +6,7 @@ export default {
       } else {
         let returnObj = Object.assign({}, result.ticketObj);
         returnObj.ticketId = result._id;
-console.log('returnObj:::::',returnObj)
-        LocalState.set("newGameTicketObj", returnObj)
+        LocalState.set('newGameTicketObj', returnObj); //HUH Should actually update REDUX store!?!
         // return returnObj;
         // Store.dispatch('NewGameTicketInfo', returnObj);
       }

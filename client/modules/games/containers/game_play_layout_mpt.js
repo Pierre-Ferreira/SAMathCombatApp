@@ -13,8 +13,8 @@ console.log(infoObj)
 console.log("LocalState.get('newGameTicketObj'):",LocalState.get('newGameTicketObj'))
     let newGameTicketObj = LocalState.get('newGameTicketObj')
     if (newGameTicketObj) {
-      for (let x = 0; x < newGameTicketObj.qTotal; ++x) { //HUH? Should actually come from Store.newGameTicketObj.qTotal
-        let num1 = newGameTicketObj.MPT; //HUH? Should actually come from Store.newGameTicketObj.MPT
+      for (let x = 0; x < newGameTicketObj.qTotal; ++x) { //HUH? Should actually come from REDUX Store.newGameTicketObj.qTotal
+        let num1 = newGameTicketObj.MPT; //HUH? Should actually come from REDUX Store.newGameTicketObj.MPT
         let num2 = Math.floor(Math.random() * 15) + 1;
         let correctAnswer = num1 * num2;
         let questionSetup = {

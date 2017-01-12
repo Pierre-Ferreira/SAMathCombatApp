@@ -114,7 +114,7 @@ class MainSidebarNavImpl extends React.Component {
                   onTouchTap={() => this.handleClose()}
                 />,
                 <ListItem
-                  href="/tc"
+                  href="/pamgameplay/TICKETIDNEEDED'"
                   primaryText="'+-++-+--...'"
                   key={2}
                   onTouchTap={() => this.handleClose()}
