@@ -31,7 +31,10 @@ class MptTicketCreatorListImpl extends React.Component {
         {mptGameTicketsReady ?
           mptGameTickets.map((x,i) => {
             return <div key={i} onClick={this._loadToForm.bind(this, x._id)}>
-                    {x.ticketObj.gameMPTTable} {x.ticketObj.gameDifficulty}
+                    {x.ticketObj.gameMPTTable}
+                    {x.ticketObj.gameDifficulty}
+                    {x.ticketObj.time}
+                    {x.ticketObj.qTotal}
                    </div>;
           }) :
           <div> LOADING...</div>}

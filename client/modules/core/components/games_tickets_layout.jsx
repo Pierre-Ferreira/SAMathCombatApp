@@ -32,7 +32,10 @@ console.log(this.props)
           {mptGameTicketsReady ?
             mptGameTickets.map((x,i) => {
               return <div key={i} onClick={this._loadToGAME.bind(this, x._id)}>
-                      {x.ticketObj.gameMPTTable} {x.ticketObj.gameDifficulty}
+                      {x.ticketObj.gameMPTTable}
+                      {x.ticketObj.gameDifficulty}
+                      {x.ticketObj.time}
+                      {x.ticketObj.qTotal} 
                      </div>;
             }) :
             <div> LOADING...</div>}

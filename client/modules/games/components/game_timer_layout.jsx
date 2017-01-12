@@ -52,6 +52,7 @@ class GameTimerLayoutImpl extends React.Component {
 
 // This will give a number with one digit after the decimal dot (xx.x):
     let seconds = (elapsed / 10).toFixed(1);
+    // let seconds = (elapsed/10)
 
 // Length of time allowed.
     let gameTime = this.props.time;
@@ -82,6 +83,8 @@ class GameTimerLayoutImpl extends React.Component {
             size={60}
             thickness={5}
           />
+          <h2><b>{this.props.time}s</b></h2>
+
           {/* <p><b>{seconds}s / {this.props.time}s</b></p> */}
         </div>
         <div>
