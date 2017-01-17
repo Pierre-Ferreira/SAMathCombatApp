@@ -94,7 +94,6 @@ class GamePlayLayoutMPTImpl extends React.Component {
                                  correctAnswer={correctAnswer}
               /> :
               <div>
-                <div>HUH?</div>
                 <h1>GAME OVER</h1>
                 <GameAnswersReviewType1 />
               </div>

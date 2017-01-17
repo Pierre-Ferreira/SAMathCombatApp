@@ -2,12 +2,17 @@ import { MPT_ANSWER_SUBMIT,
          GAME_TIMER_FINISHED,
          GAME_ALL_QUESTIONS_COMPLETED,
          UPDATE_QUESTION_COUNTER,
-         NEW_GAME_TICKET_INFO } from '../actions/actionTypes';
+         NEW_GAME_TICKET_INFO,
+         GAME_INFO_RESET,
+         START_GAME } from '../actions/actionTypes';
 
 export function gameInfo(state = {questionsResults: [],
                                   gameQuestionNo: 1,
                                   gameRunning: true}, action) {
   switch (action.type) {
+    case START_GAME:
+      let gameRunning = true;
+      return Object.assign({}, state, {gameRunning});
     case GAME_TIMER_FINISHED:
       return Object.assign({}, state, { gameRunning: false });
     case GAME_ALL_QUESTIONS_COMPLETED:
@@ -22,6 +27,14 @@ export function gameInfo(state = {questionsResults: [],
     case NEW_GAME_TICKET_INFO:
       let newGameTicketObj = action.newGameTicketObj;
       return Object.assign({}, state, {newGameTicketObj: newGameTicketObj});
+    case GAME_INFO_RESET:
+      questionsResults = [];
+      gameQuestionNo = 1;
+      gameRunning = false;
+      return Object.assign({}, state, {questionsResults: questionsResults,
+                                       gameQuestionNo: gameQuestionNo,
+                                       gameRunning: gameRunning
+                                      });
     default:
       return state;
   }

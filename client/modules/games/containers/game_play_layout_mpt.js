@@ -29,7 +29,6 @@ console.log("LocalState.get('newGameTicketObj'):",LocalState.get('newGameTicketO
 
     if (questionsArray.length !== 0) {
       let ticket = newGameTicketObj;
-      console.log("FINISHE1234 questionsArray:", questionsArray, ticket)
       onData(null, {questionsArray, ticket});
     }
   });

@@ -2,6 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import CircularProgress from 'material-ui/CircularProgress';
+import RaisedButton from 'material-ui/RaisedButton';
 /**
  * Import all actions as an object.
  */
@@ -19,12 +20,36 @@ class GameTimerLayoutImpl extends React.Component {
 
 // componentDidMount is called by react when the component
 // has been rendered on the page. We can set the interval here:
+    this.props.actions.StartGame();
+    this.timerStart();
+  }
+
+  componentWillUnmount() {
+
+// This method is called immediately before the component is removed
+// from the page and destroyed. We can clear the interval here:
+
+    clearInterval(this.timer);
+    this.props.actions.ResetGameInfo();
+  }
+
+  restartTimer() {
+    this.props.actions.ResetGameInfo();
+    this.props.actions.StartGame();
+    clearInterval(this.timer)
+    this.setState({elapsed: 0,  start: new Date()});
+    this.timerStart();
+  }
+
+  timerStart() {
     this.timer = setInterval(() => {
       let gameTime = this.props.time;
       let elapsedTime = (Math.round(this.state.elapsed / 100) / 10).toFixed(1);
       if (elapsedTime < gameTime) {
         if (this.props.state.gameInfo.gameRunning) {
           this.tick();
+        } else {
+          // clearInterval(this.timer);
         }
       } else {
         clearInterval(this.timer);
@@ -33,21 +58,14 @@ class GameTimerLayoutImpl extends React.Component {
     }, 5);
   }
 
-  componentWillUnmount(){
-
-// This method is called immediately before the component is removed
-// from the page and destroyed. We can clear the interval here:
-
-    clearInterval(this.timer);
-  }
-
-  tick(){
+  tick() {
 
 // This function is called every 50 ms. It updates the
 // elapsed counter. Calling setState causes the component to be re-rendered
     this.setState({elapsed: new Date() - this.state.start});
   }
   render() {
+
     let elapsed = Math.round(this.state.elapsed / 100);
 
 // This will give a number with one digit after the decimal dot (xx.x):
@@ -83,20 +101,16 @@ class GameTimerLayoutImpl extends React.Component {
             size={60}
             thickness={5}
           />
-          <h2><b>{this.props.time}s</b></h2>
-
-          {/* <p><b>{seconds}s / {this.props.time}s</b></p> */}
-        </div>
-        <div>
-          {/* <CircularProgress
-            mode="determinate"
-            value={Number(seconds)}
-            max={Number(gameTime*2)}
-            size={40}
-            thickness={25}
-            color={"Green"}
-          /> */}
-        {/* <p><b>{seconds}s / {this.props.time}s</b></p> */}
+          <h2>
+            <b>
+              {!(this.props.state.gameInfo.gameRunning) ? `${seconds}/` : ''}
+              {this.props.time}s
+            </b>
+          </h2>
+            {!(this.props.state.gameInfo.gameRunning) ?
+              <RaisedButton secondary={true}
+                            label="Speel weer?"
+                            onClick={this.restartTimer.bind(this)} /> : ''}
         </div>
       </div>
     );

@@ -16,7 +16,7 @@ export const composer = (infoObj, onData) => {
         gamePAMName: 'PAM_LESS_THAN_15',
         gameDifficulty: 'hard',
         gameVariation: 'plain',
-        time: '60',
+        time: '10',
         qTotal: '5',
         pointsPerCorrect: '50',
         pointsPerWrong: '-30',
@@ -58,7 +58,6 @@ export const composer = (infoObj, onData) => {
 
       if (questionsArray.length !== 0) {
         let ticket = newGameTicketObj;
-        console.log("FINISHE1234 questionsArray:", questionsArray, ticket)
         onData(null, {questionsArray, ticket});
       }
     // });

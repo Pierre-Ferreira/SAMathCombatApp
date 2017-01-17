@@ -3,9 +3,14 @@ import { MPT_ANSWER_SUBMIT,
          GAME_TIMER_FINISHED,
          GAME_ALL_QUESTIONS_COMPLETED,
          UPDATE_QUESTION_COUNTER,
-         NEW_GAME_TICKET_INFO } from './actionTypes';
+         NEW_GAME_TICKET_INFO,
+         GAME_INFO_RESET,
+         START_GAME } from './actionTypes';
 
 export default get_mpt_ticket_info;
+export function StartGame(nothing) {
+  return { type: START_GAME, nothing};
+}
 export function MPTAnswerSubmit(_questionResults) {
   return { type: MPT_ANSWER_SUBMIT, _questionResults };
 }
@@ -20,4 +25,7 @@ export function GameAllQuestionsCompleted(nothing) {
 }
 export function NewGameTicketInfo(newGameTicketObj) {
   return { type: NEW_GAME_TICKET_INFO, newGameTicketObj };
+}
+export function ResetGameInfo(nothing) {
+  return { type: GAME_INFO_RESET, nothing};
 }

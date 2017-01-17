@@ -19,8 +19,13 @@ class GamePlayLayoutPAMImpl extends React.Component {
   }
 
   componentWillMount() {
+    this.state = {restartFlag: true};
+  }
+
+  componentWillUnmount() {
 
   }
+
 
   render() {
 // Check if the game is still running.
@@ -93,6 +98,7 @@ class GamePlayLayoutPAMImpl extends React.Component {
                                  correctAnswer={correctAnswer}
             /> :
               <div>
+
                 <h1>GAME OVER</h1>
                 <GameAnswersReviewType1 />
               </div>
