@@ -1,5 +1,6 @@
 import React from 'react';
 import QuestionLayoutMPT from '../containers/question_layout_mpt.js';
+import GameAnswersReviewType1 from '../containers/game_answers_review_type_1.js';
 import { GameTimerLayout } from './game_timer_layout.jsx';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -31,6 +32,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
     let qNo = Number(questionsArray[gameQuestionNo - 1].qNo);
     let num1 = Number(questionsArray[gameQuestionNo - 1].num1);
     let num2 = Number(questionsArray[gameQuestionNo - 1].num2);
+    let operation = 'x'
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
 
 // Get the game's ticket info.
@@ -84,12 +86,19 @@ class GamePlayLayoutMPTImpl extends React.Component {
             <div>Punte totaal: {gameCurrentMetrics.pointsTotal}pts</div>
             <div>Persentasie: {gameCurrentMetrics.percentage}%</div>
             {gameRunning ?
-            <QuestionLayoutMPT qNo={qNo}
-                               qTotal={qTotal}
-                               num1={num1}
-                               num2={num2}
-                               correctAnswer={correctAnswer}
-            /> : <h1>GAME OVER</h1> }
+              <QuestionLayoutMPT qNo={qNo}
+                                 qTotal={qTotal}
+                                 num1={num1}
+                                 num2={num2}
+                                 operation={operation}
+                                 correctAnswer={correctAnswer}
+              /> :
+              <div>
+                <div>HUH?</div>
+                <h1>GAME OVER</h1>
+                <GameAnswersReviewType1 />
+              </div>
+            }
          </CardText>
          {/* <CardActions expandable={true}>
              <FlatButton label="Action1" />

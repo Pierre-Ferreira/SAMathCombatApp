@@ -20,9 +20,9 @@ class QuestionLayoutMPTImpl extends React.Component {
   }
   _answerSubmit(e) {
     e.preventDefault();
-    let userAnswer = this.state.userAnswer;
-    let correctAnswer = this.props.correctAnswer;
-    let result = (Number(userAnswer) === Number(correctAnswer)) ? 'C' : 'W';
+    let userAnswer = Number(this.state.userAnswer);
+    let correctAnswer = Number(this.props.correctAnswer);
+    let result = (userAnswer === correctAnswer) ? 'C' : 'W';
     if (result === 'C') {
       this.setState({resultFeedback: 'REG:)'});
     } else {
@@ -32,13 +32,14 @@ class QuestionLayoutMPTImpl extends React.Component {
       qNo: this.props.qNo,
       num1: this.props.num1,
       num2: this.props.num2,
+      operation: this.props.operation,
       userAnswer,
       correctAnswer,
       result
     };
     this.props.actions.MPTAnswerSubmit(questionResult);
-    // let prevQuestionCnt = this.props.qNo;
-    // Check if any questions are left.
+
+// Check if any questions are left.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
     let qTotal = this.props.qTotal;
     if (gameQuestionNo < qTotal) {

@@ -16,18 +16,33 @@ class QuestionLayoutPAMImpl extends React.Component {
 
   }
   componentWillMount() {
-    this.state = {userAnswer: ''};
+    this.state = {userAnswer: '',
+                  prevOperation: '',
+                  prevNum1: '',
+                  prevNum2: '',
+                  prevAnswer: '',
+    };
+    // this.setState({userAnswer:
   }
   _answerSubmit(e) {
     e.preventDefault();
-    let userAnswer = this.state.userAnswer;
-    let correctAnswer = this.props.correctAnswer;
-    let result = (Number(userAnswer) === Number(correctAnswer)) ? 'C' : 'W';
+    let userAnswer = Number(this.state.userAnswer);
+    let correctAnswer = Number(this.props.correctAnswer);
+    let result = (userAnswer === correctAnswer) ? 'C' : 'W';
+    // Set feedback string values.
+    let prevAnswer = userAnswer;
+    let prevNum1 = this.props.num1;
+    let prevNum2 = this.props.num2;
+    let prevOperation =  this.props.operation;
+    let resultFeedback = `${prevNum1} ${prevOperation} ${prevNum2} = ${prevAnswer}`;
     if (result === 'C') {
-      this.setState({resultFeedback: 'REG:)'});
+      resultFeedback += ' REG:)'
+      this.setState({resultFeedback: resultFeedback});
     } else {
-      this.setState({resultFeedback: 'VERKEERD!'});
+      resultFeedback += ' VERKEERD!'
+      this.setState({resultFeedback: resultFeedback});
     }
+
     let questionResult = {
       qNo: this.props.qNo,
       num1: this.props.num1,
@@ -73,19 +88,20 @@ class QuestionLayoutPAMImpl extends React.Component {
 
     let props = this.props;
     let resultFeedback = this.state.resultFeedback;
-
     return (
       <div>
-        <form onSubmit={this._answerSubmit.bind(this)}>
+        <form onSubmit={this._answerSubmit.bind(this)} autoComplete="off">
           <div>
             <h1>
-            {props.num1} {props.operation} {props.num2} =
-            <TextField id="answerRefid"
-                       value={this.state.userAnswer || ''} // OR is important to keep input controlled.
-                       onChange={this._answerOnChange.bind(this)}/>
+              {props.num1} {props.operation} {props.num2} =
+              <TextField id="answerRefid"
+                         value={this.state.userAnswer || ''} // OR is important to keep input controlled.
+                         onChange={this._answerOnChange.bind(this)}
+                         autoComplete="off"
+              />
             </h1>
+            <h3> {resultFeedback} </h3>
           </div>
-          <div>{resultFeedback}</div>
         </form>
       </div>
     );

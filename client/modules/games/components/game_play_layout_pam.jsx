@@ -1,5 +1,6 @@
 import React from 'react';
 import QuestionLayoutPAM from '../containers/question_layout_pam.js';
+import GameAnswersReviewType1 from '../containers/game_answers_review_type_1.js';
 import { GameTimerLayout } from './game_timer_layout.jsx';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -84,13 +85,18 @@ class GamePlayLayoutPAMImpl extends React.Component {
             <div>Punte totaal: {gameCurrentMetrics.pointsTotal}pts</div>
             <div>Persentasie: {gameCurrentMetrics.percentage}%</div>
             {gameRunning ?
-            <QuestionLayoutPAM qNo={qNo}
-                               qTotal={qTotal}
-                               num1={num1}
-                               num2={num2}
-                               operation={operation}
-                               correctAnswer={correctAnswer}
-            /> : <h1>GAME OVER</h1> }
+              <QuestionLayoutPAM qNo={qNo}
+                                 qTotal={qTotal}
+                                 num1={num1}
+                                 num2={num2}
+                                 operation={operation}
+                                 correctAnswer={correctAnswer}
+            /> :
+              <div>
+                <h1>GAME OVER</h1>
+                <GameAnswersReviewType1 />
+              </div>
+            }
          </CardText>
          {/* <CardActions expandable={true}>
              <FlatButton label="Action1" />

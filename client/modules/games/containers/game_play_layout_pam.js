@@ -17,18 +17,19 @@ export const composer = (infoObj, onData) => {
         gameDifficulty: 'hard',
         gameVariation: 'plain',
         time: '60',
-        qTotal: '20',
+        qTotal: '5',
         pointsPerCorrect: '50',
         pointsPerWrong: '-30',
         bonus100Perc: '500',
         bonus90Perc: '300',
         bonus80Perc: '150',
-        penalty49Perc: '-300'
+        penalty49Perc: '-300',
+        upperLimit: '10'
       }
       if (newGameTicketObj) {
         for (let x = 0; x < newGameTicketObj.qTotal; ++x) { // HUH? Should actually come from REDUX Store.newGameTicketObj.qTotal
-          let num1 = Math.floor(Math.random() * 15) + 1;
-          let num2 = Math.floor(Math.random() * 15) + 1;
+          let num1 = Math.floor(Math.random() * newGameTicketObj.upperLimit) + 1;
+          let num2 = Math.floor(Math.random() * newGameTicketObj.upperLimit) + 1;
           let operation = (Math.floor(Math.random() * 100) % 2 === 0) ? '+' : '-';
           let correctAnswer = ''
           if (operation === '-') {
