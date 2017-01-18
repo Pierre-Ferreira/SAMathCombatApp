@@ -1,7 +1,7 @@
 import React from 'react';
 import QuestionLayoutMPT from '../containers/question_layout_mpt.js';
 import GameAnswersReviewType1 from '../containers/game_answers_review_type_1.js';
-import { GameTimerLayout } from './game_timer_layout.jsx';
+import GameTimerLayout from '../containers/game_timer_layout.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 

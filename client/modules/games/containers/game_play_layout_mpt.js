@@ -8,9 +8,11 @@ console.log(infoObj)
   const {Meteor, Collections, Store, Tracker, LocalState} = context();
   LocalState.set('newGameTicketObj', '')
   GetMPTTicketInfo(ticketId.ticketId); // HUH? ticketId.ticketId?!?
-  let questionsArray = [];
-  Tracker.autorun(function () {
-console.log("LocalState.get('newGameTicketObj'):",LocalState.get('newGameTicketObj'))
+  Tracker.autorun(function () { // Autorun on 'resetGameFlag' & 'newGameTicketObj' changes.
+    let questionsArray = [];
+// Check if the game has been reset.
+    let resetGameTrigger = LocalState.get('resetGameTrigger'); //Gets unique value to trigger autorun.
+// Check if the ticket has been received from the database (Async).
     let newGameTicketObj = LocalState.get('newGameTicketObj')
     if (newGameTicketObj) {
       for (let x = 0; x < newGameTicketObj.qTotal; ++x) { //HUH? Should actually come from REDUX Store.newGameTicketObj.qTotal
@@ -26,7 +28,7 @@ console.log("LocalState.get('newGameTicketObj'):",LocalState.get('newGameTicketO
         questionsArray.push(questionSetup);
       }
     }
-
+console.table(questionsArray)
     if (questionsArray.length !== 0) {
       let ticket = newGameTicketObj;
       onData(null, {questionsArray, ticket});

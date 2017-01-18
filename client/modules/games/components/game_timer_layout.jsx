@@ -11,7 +11,6 @@ import * as Actions from '../actions';
 class GameTimerLayoutImpl extends React.Component {
   constructor(props) {
     super(props);
-
   }
   componentWillMount() {
     this.state = {elapsed: 0, start: new Date()};
@@ -36,8 +35,9 @@ class GameTimerLayoutImpl extends React.Component {
   restartTimer() {
     this.props.actions.ResetGameInfo();
     this.props.actions.StartGame();
-    clearInterval(this.timer)
-    this.setState({elapsed: 0,  start: new Date()});
+    this.props.LocalState.set('resetGameTrigger', new Date()); //Use Date() to sent new value for autorun.
+    clearInterval(this.timer);
+    this.setState({elapsed: 0, start: new Date()});
     this.timerStart();
   }
 
