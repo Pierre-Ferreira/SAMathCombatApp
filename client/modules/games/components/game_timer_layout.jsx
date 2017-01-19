@@ -33,8 +33,10 @@ class GameTimerLayoutImpl extends React.Component {
   }
 
   restartTimer() {
+    //Reset values in REDUX.
     this.props.actions.ResetGameInfo();
     this.props.actions.StartGame();
+    //Create new questions.
     this.props.LocalState.set('resetGameTrigger', new Date()); //Use Date() to sent new value for autorun.
     clearInterval(this.timer);
     this.setState({elapsed: 0, start: new Date()});
@@ -65,7 +67,7 @@ class GameTimerLayoutImpl extends React.Component {
     this.setState({elapsed: new Date() - this.state.start});
   }
   render() {
-
+console.log('TIMER REDUX CHANGE1!')
     let elapsed = Math.round(this.state.elapsed / 100);
 
 // This will give a number with one digit after the decimal dot (xx.x):

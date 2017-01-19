@@ -13,15 +13,15 @@ export const composer = (infoObj, onData) => {
       gamePAMName: 'PAM_LESS_THAN_15',
       gameDifficulty: 'hard',
       gameVariation: 'plain',
-      time: '10',
-      qTotal: '5',
+      time: '60',
+      qTotal: '15',
       pointsPerCorrect: '50',
       pointsPerWrong: '-30',
       bonus100Perc: '500',
       bonus90Perc: '300',
       bonus80Perc: '150',
       penalty49Perc: '-300',
-      upperLimit: '10'
+      upperLimit: '20'
     }
     if (newGameTicketObj) {
       for (let x = 0; x < newGameTicketObj.qTotal; ++x) { // HUH? Should actually come from REDUX Store.newGameTicketObj.qTotal

@@ -8,19 +8,6 @@ import GamePlayLayoutPAM from './containers/game_play_layout_pam.js';
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(MainLayout);
 
-  // let ticket = { // Ticket will be passed as a prop via FlowRouter.
-  //   time: 5,
-  //   qTotal: 2,
-  //   MPT: 5,
-  //   variation: 'plain',
-  //   bonus100Perc: 300,
-  //   bonus90Perc: 150,
-  //   bonus80Perc: 100,
-  //   penalty49Perc: 150,
-  //   pointsPerCorrect: 20,
-  //   pointsPerWrong: -10,
-  // };
-
   FlowRouter.route('/mptgameplay/:ticketId', {
     name: 'mpt_game_play',
     action(ticketId) {

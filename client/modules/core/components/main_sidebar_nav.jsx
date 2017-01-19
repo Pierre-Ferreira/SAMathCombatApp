@@ -1,5 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
+import AccountsUIWrapper from '../../../../imports/ui/AccountsUIWrapper.jsx'
+
 import { Divider, Drawer, FlatButton, List, ListItem } from 'material-ui'
 import DashboardIcon from 'material-ui/svg-icons/action/dashboard'
 import LibraryBooksIcon from 'material-ui/svg-icons/av/library-books'
@@ -71,6 +74,7 @@ class MainSidebarNavImpl extends React.Component {
   }
 
   render() {
+    console.log('NAVBAR REDUX CHANGE1!')
     return (
       <div>
         <Drawer
@@ -81,16 +85,11 @@ class MainSidebarNavImpl extends React.Component {
           {/* <ProfileMenu /> */}
 
           <List>
+            <AccountsUIWrapper />
             <ListItem
               leftIcon={<DashboardIcon />}
               href="/"
               primaryText="HOME"
-              onTouchTap={() => this.handleClose()}
-            />
-            <ListItem
-              leftIcon={<LibraryBooksIcon />}
-              href="/item2"
-              primaryText="Item 2"
               onTouchTap={() => this.handleClose()}
             />
             <ListItem
@@ -128,6 +127,7 @@ class MainSidebarNavImpl extends React.Component {
               ]}
             />
             <Divider />
+
             <ListItem
               leftIcon={<EmailIcon />}
               href="/contact"

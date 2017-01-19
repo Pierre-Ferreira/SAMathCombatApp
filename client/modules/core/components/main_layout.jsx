@@ -3,6 +3,7 @@ import Favicon from 'react-favicon';
 import { Provider } from 'react-redux';
 import { useDeps } from 'mantra-core';
 import { MainSidebarNav } from '../components/main_sidebar_nav.jsx';
+import AuthWrapper from '../containers/auth_wrapper'
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from '../../../../node_modules/material-ui/styles/getMuiTheme';
 
@@ -44,12 +45,14 @@ class MainLayoutImpl extends React.Component {
     return (
       <div>
         {/* <Favicon url={[ '/src/favicon.ico' ]}/> */}
-        <Provider store={this.props.store}>
-          <div>
-            <MainSidebarNav />
-            <div style={styles.content}>{this.props.content()}</div>
-          </div>
-        </Provider>
+        <AuthWrapper>
+          <Provider store={this.props.store}>
+            <div>
+              <MainSidebarNav />
+              <div style={styles.content}>{this.props.content()}</div>
+            </div>
+          </Provider>
+        </AuthWrapper>
       </div>
     );
   }

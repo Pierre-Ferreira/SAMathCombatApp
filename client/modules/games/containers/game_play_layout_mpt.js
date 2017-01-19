@@ -28,7 +28,6 @@ console.log(infoObj)
         questionsArray.push(questionSetup);
       }
     }
-console.table(questionsArray)
     if (questionsArray.length !== 0) {
       let ticket = newGameTicketObj;
       onData(null, {questionsArray, ticket});
