@@ -3,7 +3,7 @@ import {mount} from 'react-mounter';
 
 import { MainLayout } from './components/main_layout.jsx';
 import Home from './components/home.jsx';
-import GamesTicketsLayout from '../core/containers/games_tickets_layout.js'
+import GamesTicketsLayout from '../core/containers/games_tickets_layout.js';
 
 
 export default function (injectDeps, {FlowRouter}) {

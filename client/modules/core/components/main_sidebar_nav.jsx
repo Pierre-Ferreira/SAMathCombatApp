@@ -74,7 +74,6 @@ class MainSidebarNavImpl extends React.Component {
   }
 
   render() {
-    console.log('NAVBAR REDUX CHANGE1!')
     return (
       <div>
         <Drawer

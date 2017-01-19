@@ -67,7 +67,6 @@ class GameTimerLayoutImpl extends React.Component {
     this.setState({elapsed: new Date() - this.state.start});
   }
   render() {
-console.log('TIMER REDUX CHANGE1!')
     let elapsed = Math.round(this.state.elapsed / 100);
 
 // This will give a number with one digit after the decimal dot (xx.x):

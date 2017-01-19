@@ -16,20 +16,14 @@ import FlatButton from 'material-ui/FlatButton';
 class GamePlayLayoutMPTImpl extends React.Component {
   constructor(props) {
     super(props);
-    this.testFunc(1)
+
   }
 
   componentWillMount() {
-    this.testFunc(2)
-  }
 
-  testFunc(param) {
-let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
-console.log('SOMETHING CALLED ME!:',param, gameQuestionNo)
   }
 
   render() {
-console.log('MPT REDUX CHANGE3!')
 // Check if the game is still running.
     let gameRunning = this.props.state.gameInfo.gameRunning;
 
@@ -59,10 +53,10 @@ console.log('MPT REDUX CHANGE3!')
       pointsTotal: 0,
       percentage: 0
     };
+
     let questionsResults = this.props.state.gameInfo.questionsResults;
-console.log('MPT REDUX CHANGE!')
+    
     let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
-console.log('MPT REDUX CHANGE2!')
       if (x.result === 'C') {
         ++obj.correct;
         obj.pointsScored += Number(this.props.ticket.pointsPerCorrect);
