@@ -4,11 +4,13 @@ export default {
       if (err) {
         console.log('err:', err.message);
       } else {
-        let returnObj = Object.assign({}, result.ticketObj);
-        returnObj.ticketId = result._id;
-        LocalState.set('newGameTicketObj', returnObj); //HUH Should actually update REDUX store!?!
-        // return returnObj;
-        // Store.dispatch('NewGameTicketInfo', returnObj);
+        let newGameTicketObj = Object.assign({}, result.ticketObj);
+        newGameTicketObj.ticketId = result._id;
+        LocalState.set('newGameTicketTrigger', new Date());
+        Store.dispatch({
+          type: 'NEW_GAME_TICKET_INFO',
+          newGameTicketObj
+        });
       }
     });
   }

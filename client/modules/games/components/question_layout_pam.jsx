@@ -33,13 +33,13 @@ class QuestionLayoutPAMImpl extends React.Component {
     let prevAnswer = userAnswer;
     let prevNum1 = this.props.num1;
     let prevNum2 = this.props.num2;
-    let prevOperation =  this.props.operation;
+    let prevOperation = this.props.operation;
     let resultFeedback = `${prevNum1} ${prevOperation} ${prevNum2} = ${prevAnswer}`;
     if (result === 'C') {
-      resultFeedback += ' REG:)'
+      resultFeedback += ' REG:)';
       this.setState({resultFeedback: resultFeedback});
     } else {
-      resultFeedback += ' VERKEERD!'
+      resultFeedback += ' VERKEERD!';
       this.setState({resultFeedback: resultFeedback});
     }
 

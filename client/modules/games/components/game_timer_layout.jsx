@@ -33,11 +33,11 @@ class GameTimerLayoutImpl extends React.Component {
   }
 
   restartTimer() {
-    //Reset values in REDUX.
+    // Reset values in REDUX.
     this.props.actions.ResetGameInfo();
     this.props.actions.StartGame();
-    //Create new questions.
-    this.props.LocalState.set('resetGameTrigger', new Date()); //Use Date() to sent new value for autorun.
+    // Create new questions.
+    this.props.LocalState.set('resetGameTrigger', new Date()); // Use Date() to sent new value for autorun.
     clearInterval(this.timer);
     this.setState({elapsed: 0, start: new Date()});
     this.timerStart();

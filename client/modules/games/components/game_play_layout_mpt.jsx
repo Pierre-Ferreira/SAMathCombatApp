@@ -23,9 +23,19 @@ class GamePlayLayoutMPTImpl extends React.Component {
 
   }
 
+  checkGameRunning() {
+    let gameRunning = this.props.state.gameInfo.gameRunning;
+    if (!gameRunning) {console.log("HERE5")}
+    this.props.Store.subscribe(this.handleChange);
+  }
+  handleChange () {
+    console.log("HERE 6")
+  }
   render() {
+
 // Check if the game is still running.
     let gameRunning = this.props.state.gameInfo.gameRunning;
+    if (!gameRunning) {console.log("HERE4")}
 
 // Get the questions info.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
@@ -33,7 +43,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
     let qNo = Number(questionsArray[gameQuestionNo - 1].qNo);
     let num1 = Number(questionsArray[gameQuestionNo - 1].num1);
     let num2 = Number(questionsArray[gameQuestionNo - 1].num2);
-    let operation = 'x'
+    let operation = 'x';
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
 
 // Get the game's ticket info.
@@ -55,7 +65,6 @@ class GamePlayLayoutMPTImpl extends React.Component {
     };
 
     let questionsResults = this.props.state.gameInfo.questionsResults;
-    
     let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
       if (x.result === 'C') {
         ++obj.correct;

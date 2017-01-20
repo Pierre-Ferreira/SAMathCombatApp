@@ -1,13 +1,21 @@
-import get_mpt_ticket_info from './get_mpt_ticket_info';
+import getMptTicketInfo from './get_mpt_ticket_info';
+import createGameResultRecord from './create_game_result_record';
+
 import { MPT_ANSWER_SUBMIT,
          GAME_TIMER_FINISHED,
          GAME_ALL_QUESTIONS_COMPLETED,
          UPDATE_QUESTION_COUNTER,
          NEW_GAME_TICKET_INFO,
          GAME_INFO_RESET,
-         START_GAME } from './actionTypes';
+         START_GAME,
+         GAME_RESULT_RECORD_ID } from './actionTypes';
 
-export default get_mpt_ticket_info;
+export {getMptTicketInfo,
+        createGameResultRecord};
+
+export function gameResultRecordId(recordId) {
+  return { type: GAME_RESULT_RECORD_ID, recordId}; 
+}
 export function StartGame(nothing) {
   return { type: START_GAME, nothing};
 }
