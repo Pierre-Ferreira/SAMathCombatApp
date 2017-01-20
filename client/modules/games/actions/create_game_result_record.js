@@ -6,12 +6,13 @@ export default {
       if (err) {
         console.error('create_game_result_record:', err.message);
       } else {
-
         let recordId = result;
-        Store.dispatch({
-          type: 'GAME_RESULT_RECORD_ID',
-          recordId,
-        });
+        setTimeout(function() {
+          Store.dispatch({
+            type: 'GAME_RESULT_RECORD_ID',
+            recordId,
+          });
+        }, 5000)
       }
     });
   }

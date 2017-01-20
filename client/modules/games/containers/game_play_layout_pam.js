@@ -3,7 +3,7 @@ import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
 import {GamePlayLayoutPAM} from '../components/game_play_layout_pam.jsx';
 
 export const composer = (infoObj, onData) => {
-  let {context, ticketId, GetMPTTicketInfo} = infoObj;
+  let {context, ticketId, GetMPTTicketInfo, CreateGameResultRecord} = infoObj;
   const {Meteor, Collections, Store, Tracker, LocalState} = context();
   Tracker.autorun(function () { // Autorun on 'resetGameFlag' & 'newGameTicketObj' changes.
     let questionsArray = [];
@@ -13,7 +13,7 @@ export const composer = (infoObj, onData) => {
       gamePAMName: 'PAM_LESS_THAN_15',
       gameDifficulty: 'hard',
       gameVariation: 'plain',
-      time: '60',
+      time: '6',
       qTotal: '15',
       pointsPerCorrect: '50',
       pointsPerWrong: '-30',
@@ -52,9 +52,13 @@ export const composer = (infoObj, onData) => {
         questionsArray.push(questionSetup);
       }
     }
-console.table(questionsArray)
     if (questionsArray.length !== 0) {
       let ticket = newGameTicketObj;
+// Call the method to create a game result record.
+      CreateGameResultRecord(Meteor.userId(),
+                             ticketId.ticketId,
+                             questionsArray
+                            );
       onData(null, {questionsArray, ticket});
     }
   });
@@ -62,7 +66,8 @@ console.table(questionsArray)
 
 export const depsMapper = (context, actions) => ({
   context: () => context,
-  GetMPTTicketInfo: actions.default.GetMPTTicketInfo // HUH? Why .default. ?
+  GetMPTTicketInfo: actions.getMptTicketInfo.GetMPTTicketInfo,
+  CreateGameResultRecord: actions.createGameResultRecord.CreateGameResultRecord
 });
 
 export default composeAll(

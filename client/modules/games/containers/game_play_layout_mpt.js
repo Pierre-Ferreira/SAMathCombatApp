@@ -27,6 +27,7 @@ console.log(infoObj)
           qNo: x + 1,
           num1,
           num2,
+          operation: 'x',
           correctAnswer
         };
         questionsArray.push(questionSetup);
@@ -35,19 +36,19 @@ console.log(infoObj)
     if (questionsArray.length !== 0) {
       let ticket = newGameTicketObj;
 // Call the method to create a game result record.
-      let gameResultID = CreateGameResultRecord(Meteor.userId(),
-                                                ticketId.ticketId,
-                                                questionsArray
-                                                );
-console.log('gameResultID:', gameResultID);
+      CreateGameResultRecord(Meteor.userId(),
+                             ticketId.ticketId,
+                             questionsArray
+                            );
+// console.log('gameResultID:', gameResultID);
       onData(null, {questionsArray, ticket});
     }
   });
 };
 
 export const depsMapper = (context, actions) => {
-  console.log("actions3333:",actions)
-  console.log("context3333:",context)
+  // console.log("actions3333:",actions)
+  // console.log("context3333:",context)
   return {
     context: () => context,
     GetMPTTicketInfo: actions.getMptTicketInfo.GetMPTTicketInfo,

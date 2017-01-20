@@ -32,6 +32,8 @@ class GamePlayLayoutMPTImpl extends React.Component {
     console.log("HERE 6")
   }
   render() {
+// Check if the new game result id has been set.
+    let gameResultRecordId = this.props.state.gameInfo.gameResultRecordId;
 
 // Check if the game is still running.
     let gameRunning = this.props.state.gameInfo.gameRunning;
@@ -81,6 +83,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
 
     return (
       <div>
+        {gameResultRecordId ?
         <Card expanded={true}>
          <CardHeader
            title= {title}
@@ -115,9 +118,10 @@ class GamePlayLayoutMPTImpl extends React.Component {
              <FlatButton label="Action1" />
              <FlatButton label="Action2" />
          </CardActions> */}
-        </Card>
-
+        </Card> :
+        <div>Loading... (waiting for 'gameResultRecordId')</div>}
       </div>
+
     );
   }
 }

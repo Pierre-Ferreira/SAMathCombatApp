@@ -124,6 +124,7 @@ class MptTicketCreatorForm extends React.Component {
           <Field name="ticketId"
                  component={renderTextField}
                  hintText=""
+                 value="x"
                  disabled = {true}
                  floatingLabelText=""/>
           <Field name="gameMPTTable" component={renderSelectField} hintText="Game Table">
