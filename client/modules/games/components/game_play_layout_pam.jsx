@@ -113,7 +113,7 @@ class GamePlayLayoutPAMImpl extends React.Component {
              <FlatButton label="Action2" />
          </CardActions> */}
         </Card> :
-        <div>Loading... (waiting for 'gameResultRecordId')</div>}
+        <div>Loading... (waiting for 'gameResultRecordId')(game_play_layout_pam)</div>}
       </div>
     );
   }

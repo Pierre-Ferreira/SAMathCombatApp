@@ -35,10 +35,10 @@ console.log(this.props)
                       {x.ticketObj.gameMPTTable}
                       {x.ticketObj.gameDifficulty}
                       {x.ticketObj.time}
-                      {x.ticketObj.qTotal} 
+                      {x.ticketObj.qTotal}
                      </div>;
             }) :
-            <div> LOADING...</div>}
+            <div> LOADING...(games_tickets_layout)</div>}
         </div>
       </div>
     );

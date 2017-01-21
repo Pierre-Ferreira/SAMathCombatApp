@@ -36,11 +36,7 @@ class QuestionLayoutMPTImpl extends React.Component {
       resultFeedback += ' VERKEERD!';
       this.setState({resultFeedback: resultFeedback});
     }
-    // if (result === 'C') {
-    //   this.setState({resultFeedback: 'REG:)'});
-    // } else {
-    //   this.setState({resultFeedback: 'VERKEERD!'});
-    // }
+
     let questionResult = {
       qNo: this.props.qNo,
       num1: this.props.num1,
@@ -51,7 +47,7 @@ class QuestionLayoutMPTImpl extends React.Component {
       result
     };
     this.props.actions.MPTAnswerSubmit(questionResult);
-
+    this.props.calculateCurrentMetrics();
 // Check if any questions are left.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
     let qTotal = this.props.qTotal;

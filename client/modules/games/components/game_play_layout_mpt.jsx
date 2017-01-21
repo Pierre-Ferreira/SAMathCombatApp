@@ -20,24 +20,59 @@ class GamePlayLayoutMPTImpl extends React.Component {
   }
 
   componentWillMount() {
-
+    this.calculateCurrentMetrics();
+    let currentQuestionNo = this.props.state.gameInfo.gameQuestionNo;
+    this.setState({currentQuestionNo: currentQuestionNo})
   }
 
-  checkGameRunning() {
-    let gameRunning = this.props.state.gameInfo.gameRunning;
-    if (!gameRunning) {console.log("HERE5")}
-    this.props.Store.subscribe(this.handleChange);
+  componentDidUpdate(prevProps, prevState) {
+
+console.log('prevState:',prevState)
+console.log('currState:',this.state)
+    // this.calculateCurrentMetrics();
+    // let currentQuestionNo = this.props.state.gameInfo.gameQuestionNo;
+    // this.setState({currentQuestionNo: currentQuestionNo})
   }
-  handleChange () {
-    console.log("HERE 6")
+
+  calculateCurrentMetrics() {
+
+    // Determine the game's progress and Metrics.
+    let gameInitialMetrics = {
+      totalAnswered: 0,
+      correct: 0,
+      wrong: 0,
+      pointsScored: 0,
+      pointsLost: 0,
+      pointsTotal: 0,
+      percentage: 0
+    };
+
+    let ticketObj = this.props.state.gameInfo.newGameTicketObj;
+    let qTotal = Number(ticketObj.qTotal);
+    let questionsResults = this.props.state.gameInfo.questionsResults;
+    let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
+      if (x.result === 'C') {
+        ++obj.correct;
+        obj.pointsScored += Number(ticketObj.pointsPerCorrect);
+      } else {
+        ++obj.wrong;
+        obj.pointsLost += Number(ticketObj.pointsPerWrong);
+      }
+      ++obj.totalAnswered;
+      obj.pointsTotal = obj.pointsScored + obj.pointsLost;
+      obj.percentage = parseInt((obj.correct / qTotal) * 100, 10);
+      return obj;
+    }, gameInitialMetrics);
+    this.props.actions.UpdateGameResult(gameCurrentMetrics);
   }
+
   render() {
 // Check if the new game result id has been set.
     let gameResultRecordId = this.props.state.gameInfo.gameResultRecordId;
 
 // Check if the game is still running.
     let gameRunning = this.props.state.gameInfo.gameRunning;
-    if (!gameRunning) {console.log("HERE4")}
+    if (!gameRunning) {console.log("GAME STOPPED (!gameRunning)")}
 
 // Get the questions info.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
@@ -49,37 +84,15 @@ class GamePlayLayoutMPTImpl extends React.Component {
     let correctAnswer = questionsArray[gameQuestionNo - 1].correctAnswer;
 
 // Get the game's ticket info.
-    let time = Number(this.props.ticket.time);
-    let MPT = Number(this.props.ticket.MPT);
-    let qTotal = Number(this.props.ticket.qTotal);
+    let ticketObj = this.props.state.gameInfo.newGameTicketObj;
+    let time = Number(ticketObj.time);
+    let MPT = Number(ticketObj.MPT);
+    let qTotal = Number(ticketObj.qTotal);
     let title = `x${MPT} Maal tafel`;
     let subtitle = `${qTotal} vrae in ${time} sekondes`;
 
-// Determine the game's progress and Metrics.
-    let gameInitialMetrics = {
-      totalAnswered: 0,
-      correct: 0,
-      wrong: 0,
-      pointsScored: 0,
-      pointsLost: 0,
-      pointsTotal: 0,
-      percentage: 0
-    };
-
-    let questionsResults = this.props.state.gameInfo.questionsResults;
-    let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
-      if (x.result === 'C') {
-        ++obj.correct;
-        obj.pointsScored += Number(this.props.ticket.pointsPerCorrect);
-      } else {
-        ++obj.wrong;
-        obj.pointsLost += Number(this.props.ticket.pointsPerWrong);
-      }
-      ++obj.totalAnswered;
-      obj.pointsTotal = obj.pointsScored + obj.pointsLost;
-      obj.percentage = parseInt((obj.correct / qTotal) * 100, 10);
-      return obj;
-    }, gameInitialMetrics);
+// Get game metrics.
+    let gameCurrentMetrics = this.props.state.gameInfo.gameCurrentMetrics;
 
     return (
       <div>
@@ -107,6 +120,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
                                  num2={num2}
                                  operation={operation}
                                  correctAnswer={correctAnswer}
+                                 calculateCurrentMetrics = {this.calculateCurrentMetrics.bind(this)}
               /> :
               <div>
                 <h1>GAME OVER</h1>
@@ -119,7 +133,7 @@ class GamePlayLayoutMPTImpl extends React.Component {
              <FlatButton label="Action2" />
          </CardActions> */}
         </Card> :
-        <div>Loading... (waiting for 'gameResultRecordId')</div>}
+        <div>Loading... (waiting for 'gameResultRecordId')(game_play_layout_mpt)</div>}
       </div>
 
     );

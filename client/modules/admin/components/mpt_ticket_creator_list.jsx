@@ -37,7 +37,7 @@ class MptTicketCreatorListImpl extends React.Component {
                     {x.ticketObj.qTotal}
                    </div>;
           }) :
-          <div> LOADING...</div>}
+          <div> LOADING...(mpt_ticket_creator_list)</div>}
       </div>
     );
   }

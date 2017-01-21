@@ -12,7 +12,7 @@ const AuthWrapper = (infoObj) => {
 
   if (loggingIn) {
     return (
-      <div>Loading</div>
+      <div>Loading...(auth_wrapper)</div>
     );
   }
 

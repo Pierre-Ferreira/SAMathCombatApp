@@ -1,16 +1,18 @@
-import {GameMPTResults} from '/lib/collections';
+import {GameMPTSelfResults} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
 export default function () {
   Meteor.methods({
-    'create_game_result_record'(userID, ticketID, questionsArray) {
+    'create_game_result_record'(userID, ticketID) {
+      check(userID, String);
+      check(ticketID, String);
       let gameMPTResultsRecord = {
-        userID: userID,
-        ticketID: ticketID,
-        questionsArray: questionsArray
+        createdDate: new Date(),
+        userID,
+        ticketID
       };
-      return GameMPTResults.insert(gameMPTResultsRecord);
+      return GameMPTSelfResults.insert(gameMPTResultsRecord);
     }
   });
 }

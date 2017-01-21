@@ -5,12 +5,16 @@ import { MPT_ANSWER_SUBMIT,
          NEW_GAME_TICKET_INFO,
          GAME_INFO_RESET,
          START_GAME,
-         GAME_RESULT_RECORD_ID } from '../actions/actionTypes';
+         GAME_RESULT_RECORD_ID,
+         UPDATE_GAME_RESULT } from '../actions/actionTypes';
 
 export function gameInfo(state = {questionsResults: [],
                                   gameQuestionNo: 1,
                                   gameRunning: true}, action) {
   switch (action.type) {
+    case UPDATE_GAME_RESULT:
+      let gameCurrentMetrics = action.gameCurrentMetrics;
+      return Object.assign({}, state, {gameCurrentMetrics});
     case GAME_RESULT_RECORD_ID:
       let gameResultRecordId = action.recordId;
       return Object.assign({}, state, {gameResultRecordId});

@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "mantra-core": "^1.2.0",
     "material-ui": "^0.16.4",
     "meteor-auth": "^0.2.0",
