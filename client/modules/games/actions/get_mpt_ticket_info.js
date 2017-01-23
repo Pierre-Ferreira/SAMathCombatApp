@@ -11,6 +11,7 @@ export default {
           type: 'NEW_GAME_TICKET_INFO',
           newGameTicketObj
         });
+        return newGameTicketObj;
       }
     });
   }

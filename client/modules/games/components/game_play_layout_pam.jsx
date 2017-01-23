@@ -59,8 +59,8 @@ class GamePlayLayoutPAMImpl extends React.Component {
       pointsTotal: 0,
       percentage: 0
     };
-    let questionsResults = this.props.state.gameInfo.questionsResults;
-    let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
+    let gameQuestionsResults = this.props.state.gameInfo.gameQuestionsResults;
+    let gameCurrentMetrics = gameQuestionsResults.reduce((obj, x) => {
       if (x.result === 'C') {
         ++obj.correct;
         obj.pointsScored += Number(this.props.ticket.pointsPerCorrect);

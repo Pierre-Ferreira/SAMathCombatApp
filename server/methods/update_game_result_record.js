@@ -4,14 +4,19 @@ import {check} from 'meteor/check';
 
 export default function () {
   Meteor.methods({
-    'update_game_result_record'(gameResultRecordId, gameResults) {
+    'update_game_result_record'(gameResultRecordId, gameQuestionsResults) {
       check(gameResultRecordId, String);
-      check(gameResults, Object);
+      check(gameQuestionsResults, Array);
       let gameMPTResultsRecord = GameMPTSelfResults.findOne(gameResultRecordId);
       let updateValues = {
         gameFinished: new Date()
       };
-      gameMPTResultsRecord = Object.assign({},gameMPTResultsRecord, gameResults, updateValues);
+      gameMPTResultsRecord = Object.assign(
+                              {},
+                              gameMPTResultsRecord,
+                              gameQuestionsResults,
+                              updateValues
+                            );
       return GameMPTSelfResults.update(gameResultRecordId, gameMPTResultsRecord);
     }
   });

@@ -12,10 +12,10 @@ class GameAnswersReviewType1Impl extends React.Component {
   }
 
   render() {
-    const gameQuestionsResults = this.props.state.gameInfo.questionsResults;
+    const gamegameQuestionsResults = this.props.state.gameInfo.gameQuestionsResults;
     return (
       <div>
-        {gameQuestionsResults.map((x,i) => {
+        {gamegameQuestionsResults.map((x,i) => {
           const feedbackStr = (x.result === 'W') ? `Verkeerd (${x.userAnswer})` : 'Reg!';
           const answerStr = `${x.qNo}) ${x.num1} ${x.operation} ${x.num2} =
                              ${x.correctAnswer} ${feedbackStr}`;

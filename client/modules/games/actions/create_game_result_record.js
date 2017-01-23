@@ -11,6 +11,7 @@ export default {
           type: 'GAME_RESULT_RECORD_ID',
           recordId,
         });
+        LocalState.set('gameResultRecordIdReadyTrigger', new Date());
       }
     });
   }

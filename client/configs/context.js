@@ -3,6 +3,7 @@ import {Meteor} from 'meteor/meteor';
 import {FlowRouter} from 'meteor/kadira:flow-router';
 import {ReactiveDict} from 'meteor/reactive-dict';
 import {Tracker} from 'meteor/tracker';
+import logger from 'redux-logger';
 
 // Redux
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -16,7 +17,7 @@ const defaultState = {};
 
 export default function ({ reducer }) {
   const Store = createStore(reducer, compose(
-    applyMiddleware(ReduxThunk),
+    applyMiddleware(logger(), ReduxThunk),
     window.devToolsExtension ? window.devToolsExtension() : fn => fn
   ));
 

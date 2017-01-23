@@ -19,7 +19,7 @@ class GameTimerLayoutImpl extends React.Component {
 
 // componentDidMount is called by react when the component
 // has been rendered on the page. We can set the interval here:
-    this.props.actions.StartGame();
+    // this.props.actions.StartGame();
     this.timerStart();
   }
 
@@ -29,13 +29,13 @@ class GameTimerLayoutImpl extends React.Component {
 // from the page and destroyed. We can clear the interval here:
 
     clearInterval(this.timer);
-    this.props.actions.ResetGameInfo();
+    // this.props.actions.ResetGameInfo();
   }
 
   restartTimer() {
     // Reset values in REDUX.
-    this.props.actions.ResetGameInfo();
-    this.props.actions.StartGame();
+    // this.props.actions.ResetGameInfo();
+    // this.props.actions.StartGame();
     // Create new questions.
     this.props.LocalState.set('resetGameTrigger', new Date()); // Use Date() to sent new value for autorun.
     clearInterval(this.timer);

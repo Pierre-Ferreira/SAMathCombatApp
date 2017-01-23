@@ -27,8 +27,8 @@ class GamePlayLayoutMPTImpl extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
 
-console.log('prevState:',prevState)
-console.log('currState:',this.state)
+// console.log('prevState:',prevState)
+// console.log('currState:',this.state)
     // this.calculateCurrentMetrics();
     // let currentQuestionNo = this.props.state.gameInfo.gameQuestionNo;
     // this.setState({currentQuestionNo: currentQuestionNo})
@@ -49,8 +49,8 @@ console.log('currState:',this.state)
 
     let ticketObj = this.props.state.gameInfo.newGameTicketObj;
     let qTotal = Number(ticketObj.qTotal);
-    let questionsResults = this.props.state.gameInfo.questionsResults;
-    let gameCurrentMetrics = questionsResults.reduce((obj, x) => {
+    let gameQuestionsResults = this.props.state.gameInfo.gameQuestionsResults;
+    let gameCurrentMetrics = gameQuestionsResults.reduce((obj, x) => {
       if (x.result === 'C') {
         ++obj.correct;
         obj.pointsScored += Number(ticketObj.pointsPerCorrect);
@@ -72,7 +72,7 @@ console.log('currState:',this.state)
 
 // Check if the game is still running.
     let gameRunning = this.props.state.gameInfo.gameRunning;
-    if (!gameRunning) {console.log("GAME STOPPED (!gameRunning)")}
+    if (!gameRunning) {console.log("GAME STOPPED (!gameRunning)")};
 
 // Get the questions info.
     let gameQuestionNo = this.props.state.gameInfo.gameQuestionNo;
